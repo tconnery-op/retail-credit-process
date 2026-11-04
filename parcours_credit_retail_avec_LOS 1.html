@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rawbank · Parcours crédit Retail · Actuel et cible avec LOS · Onepoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Charte Onepoint : Noir Carbone #0C1113 · Bleu Azur #009DDF · Blanc Polaire #FFFFFF
+   Neutres : Anthracite #233134 · Gris perle #EFEFED · Secondaires (parcimonie) : Émeraude #009767 · Mandarine #EB5C2E */
+:root{
+  --carbone:#0C1113;--azur:#009DDF;--azur-d:#0079AD;--azur-l:#E6F5FC;--white:#fff;
+  --anthracite:#233134;--perle:#EFEFED;--emeraude:#009767;--emeraude-l:#E3F4EE;--mandarine:#EB5C2E;--mandarine-l:#FDEEE8;
+  --muted:#5E6B70;--line:#DCDFE0;--shadow:0 6px 18px rgba(12,17,19,.07);--shadow-h:0 12px 28px rgba(12,17,19,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Poppins,Arial,sans-serif;font-weight:300;color:var(--carbone);background:var(--perle);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+button{font:inherit;cursor:pointer;color:inherit}
+b,strong{font-weight:600}
+:focus-visible{outline:2px solid var(--azur);outline-offset:2px}
+.wrap{max-width:1480px;margin:auto;padding:0 40px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:30;background:var(--carbone);color:#fff}
+.top-in{max-width:1480px;margin:auto;height:64px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.client{display:flex;align-items:center;gap:14px}
+.client b{font-size:15px;font-weight:600}
+.client span{font-size:12px;color:#9AA5A9}
+.client .sep{width:1px;height:24px;background:#3A474B}
+.crumbs{font-size:12px;color:#9AA5A9;display:flex;gap:8px;align-items:center}
+.crumbs button{background:none;border:0;color:#fff;padding:0;font-size:12px}
+.crumbs button:hover{color:var(--azur)}
+.logo{font-weight:700;font-size:20px;letter-spacing:-.03em;color:#fff;display:flex;align-items:baseline}
+.logo i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--azur);margin-left:2px}
+.logo.dark{color:var(--carbone)}
+
+.view{display:none}.view.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kicker{font-size:13px;font-weight:500;color:var(--azur)}
+
+/* Hero macro */
+.hero{position:relative;overflow:hidden;background:var(--carbone);color:#fff}
+.hero .wrap{position:relative;z-index:2;padding-top:56px;padding-bottom:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.hero h1{margin:10px 0 14px;font-size:46px;line-height:1.1;font-weight:700;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--azur)}
+.hero p{margin:0;max-width:640px;color:#B9C2C5;font-size:15px;line-height:1.6}
+.ring{position:absolute;right:-140px;top:-160px;width:560px;height:560px;border-radius:50%;
+  background:conic-gradient(from 200deg,var(--azur),#5B3FD9,#DE007E,var(--azur));opacity:.9;z-index:1;
+  -webkit-mask:radial-gradient(circle,transparent 46%,#000 46.5%);mask:radial-gradient(circle,transparent 46%,#000 46.5%)}
+.kpis{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(6px)}
+.kpi{padding:16px 24px;border-right:1px solid rgba(255,255,255,.12)}
+.kpi:last-child{border-right:0}
+.kpi b{display:block;font-size:28px;font-weight:600;color:#fff}
+.kpi span{font-size:12px;color:#9AA5A9}
+
+.chevrons{display:flex;margin:32px 0 24px;overflow-x:auto}
+.chev{flex:1;min-width:120px;background:#fff;border:0;padding:12px 10px 12px 28px;font-size:12px;color:var(--muted);text-align:left;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);margin-right:-8px;transition:background .15s}
+.chev:first-child{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);padding-left:16px}
+.chev b{display:block;font-size:12px;color:var(--azur)}
+.chev:hover{background:var(--azur-l)}
+.chev.on{background:var(--carbone);color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:56px}
+.card{background:#fff;border:0;border-radius:6px;padding:22px;text-align:left;display:flex;flex-direction:column;min-height:230px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.card::after{content:"";position:absolute;right:-46px;bottom:-46px;width:110px;height:110px;border-radius:50%;border:14px solid var(--azur-l);transition:border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.card:hover::after{border-color:var(--azur)}
+.card .num{font-size:28px;font-weight:200;color:var(--azur);line-height:1}
+.card h2{margin:12px 0 8px;font-size:17px;line-height:1.3;font-weight:600}
+.card p{margin:0 0 16px;font-size:13px;line-height:1.55;color:var(--muted)}
+.card .meta{margin-top:auto;font-size:12px;color:var(--muted);position:relative;z-index:1}
+.card .meta em{font-style:normal;color:var(--azur);font-weight:500;margin-left:8px}
+
+/* Détail */
+.dhead{background:var(--carbone);color:#fff;position:relative;overflow:hidden}
+.dhead .ring{width:380px;height:380px;right:-120px;top:-150px}
+.dhead .wrap{position:relative;z-index:2;padding-top:30px;padding-bottom:26px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:end}
+.dnum{font-size:64px;line-height:.85;font-weight:200;color:var(--azur)}
+.dhead h1{margin:6px 0 4px;font-size:30px;font-weight:700;letter-spacing:-.02em}
+.dhead p{margin:0;color:#B9C2C5;font-size:14px}
+.nav{display:flex;gap:8px}
+.btn{background:transparent;border:1px solid #4A5659;color:#fff;padding:9px 16px;font-size:13px;border-radius:4px;transition:.15s}
+.btn:hover:not(:disabled){border-color:var(--azur);color:var(--azur)}
+.btn:disabled{opacity:.3;cursor:default}
+.btn.main{background:var(--azur);border-color:var(--azur);color:#fff}
+.btn.main:hover{background:var(--azur-d);color:#fff}
+
+.ctx{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:6px;box-shadow:var(--shadow);margin:24px 0 18px}
+.ctx div{padding:16px 20px;border-right:1px solid var(--line)}
+.ctx div:last-child{border-right:0}
+.ctx dt{font-size:12px;font-weight:500;color:var(--azur);margin-bottom:4px}
+.ctx dd{margin:0;font-size:13px;line-height:1.45}
+
+.body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;padding-bottom:56px;align-items:start}
+.panel{background:#fff;border-radius:6px;box-shadow:var(--shadow)}
+.schema{background:linear-gradient(180deg,#fff 0%,#F7F8F8 100%)}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:22px 26px 6px}
+.ph h2{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;border-left:4px solid var(--azur);padding-left:12px;line-height:1.1}
+.legend{display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--anthracite);background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 14px;box-shadow:0 2px 6px rgba(12,17,19,.04)}
+.legend b{font-weight:600;padding-right:14px;border-right:1px solid var(--line)}
+.legend i{display:inline-block;width:18px;height:12px;margin-right:6px;vertical-align:-1px;border-radius:2px;border:1px solid var(--line);background:#fff}
+.legend .l-in{background:var(--carbone);border-color:var(--carbone)}
+.legend .l-dec{width:12px;background:var(--azur-l);border-color:var(--azur);transform:rotate(45deg)}
+.legend .l-ex{background:var(--mandarine-l);border:1.5px dashed var(--mandarine)}
+
+.scroll{overflow-x:auto;padding:26px}
+.graph{position:relative;display:grid;column-gap:46px;row-gap:56px}
+.edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+.node{position:relative;z-index:2;background:#fff;border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;text-align:left;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s,border-color .15s}
+.node:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+.node.sel{border-color:var(--azur);box-shadow:0 0 0 3px rgba(0,157,223,.2),var(--shadow-h)}
+.node .hd{display:flex;align-items:center;gap:10px}
+.node .ic{width:26px;height:26px;flex:none;color:var(--azur)}
+.node .t{font-size:11px;font-weight:600;color:var(--azur)}
+.node strong{font-size:14px;line-height:1.3;font-weight:600}
+.node small{font-size:12px;color:var(--muted);margin-top:auto}
+.node.entry,.node.exit{background:var(--carbone);border-color:var(--carbone);color:#fff;border-left:5px solid var(--azur);padding-left:18px}
+.node.entry .ic,.node.exit .ic{color:#fff}
+.node.entry .t,.node.exit .t{color:#9AA5A9}
+.node.entry strong,.node.exit strong{font-size:16px;border-left:1px solid #4A5659;padding-left:12px;margin-left:12px}
+.node.entry small,.node.exit small{color:#B9C2C5;padding-left:25px}
+.node.exception{background:#FFFBF9;border:1.5px dashed var(--mandarine)}
+.node.exception .ic,.node.exception .t{color:var(--mandarine)}
+.node.decision{background:transparent;border:0;box-shadow:none;align-items:center;justify-content:center;text-align:center;padding:0 22%}
+.node.decision:hover{transform:none}
+.node.decision .dia{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible;filter:drop-shadow(0 8px 14px rgba(0,157,223,.18))}
+.node.decision .dia polygon{fill:url(#dg);stroke:var(--azur);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.node.decision.sel{box-shadow:none}.node.decision.sel .dia polygon{stroke-width:3}
+.node.decision .hd{flex-direction:column;gap:2px}
+.node.decision strong{font-size:13px}
+.lbl{position:absolute;z-index:3;transform:translate(-50%,-50%);border-radius:99px;font-size:12px;font-weight:600;padding:3px 12px;white-space:nowrap;pointer-events:none;background:var(--azur-l);color:var(--azur-d);border:1px solid #A9DDF3}
+.lbl.yes{background:var(--emeraude-l);color:var(--emeraude);border-color:#A6DCC8}
+.lbl.no,.lbl.reg{background:var(--mandarine-l);color:#C2451D;border-color:#F6C3AF}
+
+.side{position:sticky;top:84px}
+.side .sec{padding:18px 20px;border-bottom:1px solid var(--line)}
+.side .sec:last-child{border-bottom:0}
+.side h3{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--azur)}
+.side .sel-title{font-size:15px;font-weight:600;line-height:1.35;margin:0 0 8px}
+.side .sel-meta{font-size:12px;color:var(--muted);line-height:1.6}
+.side .sel-meta b{color:var(--carbone);font-weight:500}
+.side .empty{font-size:12px;color:var(--muted)}
+.note{font-size:12px;line-height:1.6;border-left:3px solid var(--azur);padding-left:12px}
+.actors{display:flex;flex-wrap:wrap;gap:6px}
+.actors span{font-size:12px;padding:4px 10px;background:var(--perle);border-radius:99px}
+.hint{font-size:11px;color:var(--muted)}
+
+footer{background:var(--carbone);color:#9AA5A9;font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}.body{grid-template-columns:1fr}.side{position:static}.ctx{grid-template-columns:repeat(2,1fr)}.hero .wrap{grid-template-columns:1fr}.dhead .wrap{grid-template-columns:auto 1fr}.nav{grid-column:1/-1}}
+@media(max-width:680px){.wrap,.top-in{padding-left:16px;padding-right:16px}.grid{grid-template-columns:1fr}.hero h1{font-size:32px}.crumbs{display:none}.ctx{grid-template-columns:1fr}.ctx div{border-right:0;border-bottom:1px solid var(--line)}.kpis{flex-wrap:wrap}.client span,.client .sep{display:none}.dnum{font-size:40px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ===================== COUCHE LOS (charte Onepoint) ===================== */
+:root{--a-bg:#E6F5FC;--a-bd:#009DDF;--a-tx:#0079AD;--b-bg:#FFF5EA;--b-bd:#EFA45C;--b-tx:#B05E16;--c-bg:#F3F0FB;--c-bd:#9C8BD9;--c-tx:#5B45A8;--d-bg:#F4F5F5;--d-bd:#C3C9CB;--d-tx:#5E6B70;--e-bd:#E07A6E;--e-tx:#C2453A}
+.hdr-r{display:flex;align-items:center;gap:18px}
+.los-state{font-size:12px;color:#9AA5A9;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.los-state::before{content:"";width:7px;height:7px;border-radius:50%;background:#5E6B70}
+body.los-on .los-state{color:#fff}body.los-on .los-state::before{background:var(--azur);box-shadow:0 0 0 3px rgba(0,157,223,.25)}
+.los-switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;user-select:none;position:relative}
+.los-switch input{position:absolute;opacity:0;width:1px;height:1px}
+.los-switch .track{width:40px;height:22px;border-radius:99px;background:#3A474B;position:relative;transition:background .25s}
+.los-switch .thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.los-switch input:checked+.track{background:var(--azur)}
+.los-switch input:checked+.track .thumb{transform:translateX(18px)}
+.los-switch input:focus-visible+.track{outline:2px solid var(--azur);outline-offset:3px}
+.los-switch .los-label{font-size:13px;font-weight:500;color:#fff;white-space:nowrap}
+.hdr-sep{width:1px;height:24px;background:#3A474B}
+body:not(.los-on) .los-only{display:none}
+/* bandeau macro */
+.los-macro:empty{display:none}
+.los-macro{display:grid;gap:12px;margin-top:28px}
+.los-pills{display:flex;flex-wrap:wrap;gap:8px}
+.lg{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;border:1px solid;font-size:12px;font-weight:500;background:#fff}
+.lg svg,.chip svg,.cb svg{width:11px;height:11px;flex:none}
+.lg-A{border-color:var(--a-bd);color:var(--a-tx);background:var(--a-bg)}.lg-B{border-color:var(--b-bd);color:var(--b-tx);background:var(--b-bg)}.lg-C{border-color:var(--c-bd);color:var(--c-tx);background:var(--c-bg)}.lg-D{border-color:var(--d-bd);color:var(--d-tx);background:var(--d-bg)}.lg-E{border:1px dashed var(--e-bd);color:var(--e-tx)}
+.los-seq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12px;background:#fff;border-radius:6px;box-shadow:var(--shadow);padding:14px 18px}
+.los-seq b{font-size:12px;font-weight:600;color:var(--azur);margin-right:6px}
+.los-seq span{background:var(--azur-l);border-radius:4px;padding:3px 9px;color:var(--carbone)}.los-seq span.u{background:#fff;border:1px dashed var(--e-bd);color:var(--e-tx)}
+.los-seq i{font-style:normal;color:var(--azur)}
+.los-seq em{flex-basis:100%;font-style:normal;font-size:11px;color:var(--muted);margin-top:4px}
+.chev.unc b{color:var(--e-tx)}
+/* cartes macro */
+.card.los-card{min-height:280px}
+.card.los-card .imp{position:absolute;top:26px;right:22px;font-size:11px;font-weight:600;color:var(--a-tx);background:var(--a-bg);border-radius:4px;padding:3px 8px}
+.card.los-card p{margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;position:relative;z-index:1}
+.card.los-card .chips{margin-bottom:16px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;border-radius:4px;padding:2px 7px;border:1px solid}
+.chip-A{color:var(--a-tx);border-color:var(--a-bd);background:var(--a-bg)}.chip-B{color:var(--b-tx);border-color:var(--b-bd);background:var(--b-bg)}.chip-C{color:var(--c-tx);border-color:var(--c-bd);background:var(--c-bg)}.chip-D{color:var(--d-tx);border-color:var(--d-bd);background:var(--d-bg)}.chip-E{color:var(--e-tx);border:1px dashed var(--e-bd);background:#fff}
+.card.los-card.unc{background:#FFFCFB;outline:1.5px dashed var(--e-bd);outline-offset:-1.5px}
+.card.los-card.unc::after{border-color:#FBE3DF}.card.los-card.unc .num{color:var(--e-tx)}
+.card.los-card.unc .imp{color:var(--e-tx);background:#fff;border:1px dashed var(--e-bd)}
+/* légende schéma */
+.legend .l-A{background:var(--a-bg);border-color:var(--a-bd)}.legend .l-B{background:var(--b-bg);border-color:var(--b-bd)}.legend .l-C{background:var(--c-bg);border-color:var(--c-bd)}.legend .l-D{background:var(--d-bg);border-color:var(--d-bd)}.legend .l-E{background:#fff;border:1.5px dashed var(--e-bd)}
+/* graphe LOS */
+.graph.los-graph{padding:14px 22px 22px}
+.node.los{padding-bottom:12px}
+.node.los .badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.node.los small{margin-top:auto}
+.cb{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;border-radius:4px;padding:2px 7px;background:#fff;border:1px solid}
+.cb-A{color:var(--a-tx);border-color:var(--a-bd)}.cb-B{color:var(--b-tx);border-color:var(--b-bd)}.cb-C{color:var(--c-tx);border-color:var(--c-bd)}.cb-D{color:var(--d-tx);border-color:var(--d-bd)}.cb-E{color:var(--e-tx);border:1px dashed var(--e-bd)}.cb-N{color:var(--carbone);border-color:var(--line)}
+.st{display:inline-flex;align-items:center;font-size:10.5px;font-weight:500;color:var(--muted);border-radius:4px;padding:2px 7px;background:var(--perle)}
+.node.los.cat-A{background:var(--a-bg);border-color:#9ED8F1}.node.los.cat-A .ic,.node.los.cat-A .t{color:var(--a-tx)}
+.node.los.cat-B{background:var(--b-bg);border-color:#F5C89C}.node.los.cat-B .ic,.node.los.cat-B .t{color:var(--b-tx)}
+.node.los.cat-C{background:var(--c-bg);border-color:#CFC5EE}.node.los.cat-C .ic,.node.los.cat-C .t{color:var(--c-tx)}
+.node.los.cat-D{background:var(--d-bg);border-color:var(--d-bd)}.node.los.cat-D .ic,.node.los.cat-D .t{color:var(--d-tx)}
+.node.los.cat-E{background:#fff;border:1.5px dashed var(--e-bd);box-shadow:none}.node.los.cat-E .ic,.node.los.cat-E .t{color:var(--e-tx)}
+.node.los.stop{background:#fff;border:1px solid #F1C3BD;border-left:5px solid var(--e-bd)}.node.los.stop .ic,.node.los.stop .t{color:var(--e-tx)}
+.node.los.note{background:#fff;border:1px dashed var(--carbone);box-shadow:none}.node.los.note .ic,.node.los.note .t{color:var(--carbone)}
+.lbl.los-lbl{font-size:11px;padding:2px 10px}
+.lbl.gap{background:#fff;color:var(--e-tx);border:1px dashed var(--e-bd)}
+.lbl.opt{background:#fff;color:var(--muted);border-color:var(--line)}
+.outl{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.outl li{font-size:12px;line-height:1.45;border-left:2px solid var(--line);padding-left:10px}
+.outl li span{display:block;font-weight:600}.outl li em{font-style:normal;color:var(--muted)}
+.ctx dd .chips{margin-top:2px}
+/* animations de bascule */
+#graph.swap .node{animation:losIn .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0ms)}
+#graph.swap .edges{animation:losFade .6s ease .25s both}
+#cards.swap .card{animation:losIn .42s cubic-bezier(.2,.7,.2,1) both}
+#cards.swap .card:nth-child(2){animation-delay:30ms}#cards.swap .card:nth-child(3){animation-delay:60ms}#cards.swap .card:nth-child(4){animation-delay:90ms}#cards.swap .card:nth-child(5){animation-delay:120ms}#cards.swap .card:nth-child(6){animation-delay:150ms}#cards.swap .card:nth-child(7){animation-delay:180ms}#cards.swap .card:nth-child(8){animation-delay:210ms}
+@keyframes losIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes losFade{from{opacity:0}to{opacity:1}}
+/* fiche d’impact */
+.scrim{position:fixed;inset:0;background:rgba(12,17,19,.32);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,100%);background:#fff;box-shadow:-18px 0 40px rgba(12,17,19,.18);transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.77,0,.18,1),visibility 0s .38s;z-index:41;display:flex;flex-direction:column}
+.drawer.open{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.77,0,.18,1),visibility 0s}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:var(--carbone);color:#fff}
+.drawer-head span{font-size:13px;font-weight:500;color:var(--azur)}
+.drawer-close{border:1px solid #4A5659;background:transparent;color:#fff;border-radius:4px;width:34px;height:34px;font-size:18px;line-height:1}
+.drawer-close:hover{border-color:var(--azur);color:var(--azur)}
+.drawer-body{overflow:auto;padding:22px 24px 36px}
+.fh h2{margin:8px 0 6px;font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+.fh .kind{font-size:12px;font-weight:600;color:var(--azur)}
+.fbadges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 6px}
+.cmp>div{border-radius:6px;padding:13px;font-size:12.5px;line-height:1.55}
+.cmp .bef{background:var(--perle)}.cmp .aft{background:var(--azur-l)}
+.cmp h3,.drawer section h3{margin:0 0 6px;font-size:13px;font-weight:600;color:var(--azur)}
+.cmp .who{margin:0 0 6px;font-weight:600}.cmp p{margin:0}
+.drawer section{border-top:1px solid var(--line);padding:12px 0 4px;margin-top:10px}
+.drawer section ul{margin:0;padding-left:18px;font-size:13px;line-height:1.6}
+.drawer section p{font-size:13px;line-height:1.55;margin:0 0 6px}
+.drawer section.lim h3{color:var(--e-tx)}
+.muted{color:var(--muted)}
+.src{margin-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+@media(max-width:1250px){.los-state{display:none}}
+@media(max-width:680px){.hdr-r{gap:10px}.hdr-r .logo,.hdr-sep{display:none}.los-switch .los-label{font-size:12px}.cmp{grid-template-columns:1fr}.graph.los-graph{padding:10px 46px;row-gap:44px}.node.los.decision{min-height:170px}.card.los-card .imp{position:static;align-self:flex-start;margin-top:10px}}
+@media(prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2FAFE"/><stop offset="1" stop-color="#D6EFFB"/></linearGradient></defs></svg>
+<header class="top"><div class="top-in">
+  <div class="client"><b>Rawbank</b><span class="sep"></span><span>Transformation du processus crédit Retail</span></div>
+  <nav class="crumbs" id="crumbs"></nav>
+  <div class="hdr-r"><span class="los-state" id="losStatus" aria-live="polite">Processus actuel — AS-IS</span><label class="los-switch"><input type="checkbox" id="losToggle" role="switch" aria-checked="false"><span class="track"><span class="thumb"></span></span><span class="los-label">Activer le LOS</span></label><span class="hdr-sep"></span><div class="logo">onepoint<i></i></div></div>
+</div></header>
+<main>
+  <section class="view on" id="vMacro">
+    <div class="hero"><div class="ring"></div><div class="wrap">
+      <div>
+        <div class="kicker">Macro-processus actuel · Avant LOS</div>
+        <h1>Parcours crédit <em>Retail</em> actuel</h1>
+        <p>Cartographie du processus existant, de la demande en agence au monitoring documentaire post-libération. Sélectionnez une phase pour consulter son schéma opérationnel.</p>
+      </div>
+      <div class="kpis" id="kpis"></div>
+    </div></div>
+    <div class="wrap"><div class="los-macro" id="losMacro"></div><div class="chevrons" id="chevrons"></div><div class="grid" id="cards"></div></div>
+  </section>
+  <section class="view" id="vDetail">
+    <div class="dhead"><div class="ring"></div><div class="wrap">
+      <div class="dnum" id="dNum"></div>
+      <div><div class="kicker">Phase détaillée</div><h1 id="dTitle"></h1><p id="dDesc"></p></div>
+      <div class="nav">
+        <button class="btn" id="prev" type="button">← Précédente</button>
+        <button class="btn main" id="home" type="button">Vue macro</button>
+        <button class="btn" id="next" type="button">Suivante →</button>
+      </div>
+    </div></div>
+    <div class="wrap">
+      <dl class="ctx" id="ctx"></dl>
+      <div class="body">
+        <section class="panel schema">
+          <div class="ph">
+            <h2 id="phTitle">Schéma opérationnel</h2>
+            <div class="legend" id="legend"><b>Légende</b><span><i class="l-in"></i>Entrée / sortie</span><span><i></i>Activité</span><span><i class="l-dec"></i>Décision</span><span><i class="l-ex"></i>Exception / retour</span></div>
+          </div>
+          <div class="scroll"><div class="graph" id="graph"><svg class="edges" id="edges"></svg></div></div>
+        </section>
+        <aside class="panel side">
+          <div class="sec"><h3 id="selH">Activité sélectionnée</h3><div id="sel"></div></div>
+          <div class="sec los-only"><h3>Sort du flux cible</h3><div id="outList"></div></div>
+          <div class="sec"><h3>Acteurs</h3><div class="actors" id="actors"></div></div>
+          <div class="sec"><h3>Point d'attention</h3><div class="note" id="note"></div></div>
+          <div class="sec hint">Clavier : ← → pour changer de phase, Échap pour revenir à la vue macro.</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>Rawbank · Diagnostic du processus crédit Retail · Document de travail</span><span class="logo">onepoint<i></i></span></div></footer>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Fiche d’impact LOS"><div class="drawer-head"><span>Fiche d’impact LOS</span><button class="drawer-close" id="drawerClose" type="button" aria-label="Fermer la fiche">×</button></div><div class="drawer-body" id="drawerBody"></div></aside>
+<script>
+(function(){
+/* ---------- Données ---------- */
+// N(id, libellé, acteur, type, colonne, ligne)
+const N=(id,label,actor,type,col,row)=>({id,label,actor,type,col,row});
+const E=(from,to,label="",reg=false,side=false)=>({from,to,label,reg,side});
+
+const steps=[
+{title:"Demande de prêt en agence",desc:"Constitution et orientation du dossier au sein de l’agence.",actors:["Client","Gestionnaire","Gérant d’agence / N+1","Agence"],tools:"Pièces KYC · Email · Fichier Excel",input:"Besoin de crédit exprimé par le client",output:"Dossier constitué et orienté vers l’instruction",note:"Un employeur non agréé ne provoque pas automatiquement un refus. Les deux circuits convergent vers une sortie commune vers Simulation & Scoring.",cols:5,
+nodes:[N("D0","Besoin de crédit exprimé","Client","entry",1,1),N("D1","Expression du besoin de crédit","Client","activity",2,1),N("D2","Qualification de la demande","Gestionnaire","activity",3,1),N("D3","Collecte des pièces KYC","Gestionnaire","activity",4,1),N("D4","Vérification de l’agrément de l’employeur","Gestionnaire","activity",5,1),
+N("D5","Vérification de la domiciliation du salaire","Gestionnaire","activity",5,2),N("D6","Vérification de l’ancienneté professionnelle","Gestionnaire","activity",4,2),N("D7","Contrôle portefeuille, plafonds, NPL employeur et incidents client","Gestionnaire","activity",3,2),N("D8","Préparation du fichier Excel de demande","Gestionnaire","activity",2,2),N("D9","Validation et orientation du dossier par le N+1","Gérant d’agence / N+1","activity",1,2),
+N("D10","Dans la délégation locale et sans exception ?","Décision","decision",3,3),N("D11","Traitement en agence","Agence","activity",2,4),N("D12","Transmission du dossier au siège par email","Gestionnaire / Agence","activity",4,4),N("D13","Dossier orienté vers l’instruction","Vers Simulation & Scoring","exit",3,5)],
+edges:[E("D0","D1"),E("D1","D2"),E("D2","D3"),E("D3","D4"),E("D4","D5"),E("D5","D6"),E("D6","D7"),E("D7","D8"),E("D8","D9"),E("D9","D10"),E("D10","D11","Oui",false,true),E("D10","D12","Non",false,true),E("D11","D13"),E("D12","D13")]},
+
+{title:"Simulation & Scoring",desc:"Simulation initiale puis analyse et scoring par l’analyste crédit.",actors:["Gestionnaire","Analyste crédit"],tools:"Fichier Excel · Modèle de scoring Retail",input:"Dossier constitué et orienté",output:"Scoring appliqué et conditions proposées",note:"La première simulation est réalisée par le gestionnaire, la simulation finale par l’analyste crédit. La validation du scoring intervient à l’étape 3.",cols:5,
+nodes:[N("S00","Dossier orienté vers l’instruction","Agence / Siège","entry",1,1),N("S0","Première simulation de financement","Gestionnaire","activity",2,1),N("S1","Vérification du portefeuille employeur et des incidents client","Analyste crédit","activity",3,1),N("S2","Simulation finale du montant finançable","Analyste crédit","activity",4,1),N("S3","Calcul de la capacité de remboursement","Analyste crédit","activity",5,1),
+N("S4","Vérification de l’ancienneté professionnelle","Analyste crédit","activity",5,2),N("S5","Vérification de la domiciliation et du salaire","Analyste crédit","activity",4,2),N("S6","Application du modèle de scoring Retail","Analyste crédit","activity",3,2),N("S7","Détermination du montant, de la durée et du taux proposés","Analyste crédit","activity",2,2),N("S8","Scoring appliqué et conditions proposées","Vers Contrôle d’éligibilité","exit",1,2)],
+edges:[E("S00","S0"),E("S0","S1"),E("S1","S2"),E("S2","S3"),E("S3","S4"),E("S4","S5"),E("S5","S6"),E("S6","S7"),E("S7","S8")]},
+
+{title:"Contrôle d’éligibilité Retail",desc:"Contrôle documentaire, validation du scoring et identification des exceptions.",actors:["Analyste crédit","Gestionnaire","Client"],tools:"Email · Pièces justificatives · Scoring",input:"Scoring appliqué et conditions proposées",output:"Contrôles réalisés et exceptions identifiées",note:"La boucle documentaire formalise la suspension et le retour par email. Son point exact dans le diagramme métier reste à confirmer.",cols:5,
+nodes:[N("E0","Scoring appliqué et conditions proposées","Analyste crédit","entry",1,1),N("E1","Vérification de la complétude du dossier","Analyste crédit","activity",2,1),N("E2","Contrôle des pièces justificatives","Analyste crédit","activity",3,1),N("E3","Documents complets et conformes ?","Décision","decision",4,1),N("E7","Validation du scoring","Analyste crédit","activity",5,1),
+N("E6","Régularisation des documents","Gestionnaire / Client","exception",2,2),N("E5","Retour par email au gestionnaire","Analyste crédit","exception",3,2),N("E4","Mise en suspens du dossier","Analyste crédit","exception",4,2),N("E8","Confirmation du montant, de la durée et du taux","Analyste crédit","activity",5,2),
+N("E9","Identification des exceptions et dérogations","Analyste crédit","activity",5,3),N("E10","Contrôles réalisés et exceptions identifiées","Vers Offre précontractuelle","exit",4,3)],
+edges:[E("E0","E1"),E("E1","E2"),E("E2","E3"),E("E3","E7","Oui"),E("E7","E8"),E("E8","E9"),E("E9","E10"),E("E3","E4","Non",true),E("E4","E5","",true),E("E5","E6","",true),E("E6","E1","Retour",true)]},
+
+{title:"Offre précontractuelle",desc:"Préparation et consolidation de la proposition commerciale.",actors:["Analyste crédit","Intervenant compétent"],tools:"Fichier Excel",input:"Contrôles réalisés et exceptions identifiées",output:"Proposition commerciale préparée",note:"La séquence représente les composantes de l’offre. Les documents ne démontrent pas une validation indépendante de chaque composante dans cet ordre.",cols:5,
+nodes:[N("O0","Contrôles réalisés et exceptions identifiées","Analyste crédit","entry",1,1),N("O1","Élaboration de la proposition commerciale","Analyste crédit / intervenant compétent","activity",2,1),N("O2","Détermination du montant et de la durée","Intervenant compétent","activity",3,1),N("O3","Détermination du taux, des frais et commissions","Intervenant compétent","activity",4,1),N("O4","Garanties envisagées et conditions clés","Intervenant compétent","activity",5,1),
+N("O5","Consolidation de la proposition commerciale","Analyste crédit / intervenant compétent","activity",5,2),N("O6","Proposition commerciale préparée","Vers Décisions Risque & Tarif","exit",4,2)],
+edges:[E("O0","O1"),E("O1","O2"),E("O2","O3"),E("O3","O4"),E("O4","O5"),E("O5","O6")]},
+
+{title:"Décisions Risque & Tarif",desc:"Orientation vers le circuit standard, dérogatoire ou agrément employeur.",actors:["Agence","Validation commerciale siège","Crédit siège","Comité crédit"],tools:"Email · Dossier crédit · Délégations",input:"Proposition commerciale préparée",output:"Décision favorable et offre préparée",note:"Formalisation / contrôle de conformité : ≤ 10 000 USD Gérant d’agence ; > 10 000 à 30 000 USD Chargé de la libération ; > 30 000 USD Analyste crédit siège. Ne pas transposer ces seuils à toutes les décisions. PPE et hors Credex : remontée siège, circuit à confirmer. Les trois circuits peuvent se combiner.",cols:5,
+nodes:[N("R0","Proposition commerciale préparée","Analyste crédit","entry",1,1),N("R1","Réception et qualification de la proposition","Intervenant compétent","activity",2,1),N("R2","Quel circuit de traitement ?","Décision","decision",3,1),
+N("R3","Validation selon la délégation (dossier standard)","Autorité délégataire","activity",1,2),N("R4","Transmission au siège pour dérogation","Agence","activity",3,2),N("R7","Traitement de l’agrément employeur","Siège","activity",5,2),
+N("R5","Validation commerciale au siège","Validation commerciale","activity",3,3),N("R8","Décision du comité crédit sur l’agrément","Comité crédit","activity",5,3),
+N("R6","Validation Crédit au siège","Crédit siège","activity",3,4),
+N("R14","Sortie défavorable / suite à confirmer","À confirmer","exception",2,5),N("R9","Crédit approuvé ?","Décision","decision",3,5),
+N("R10","Formalisation de la décision","Autorité compétente","activity",3,6),N("R11","Confirmation des conditions retenues","Intervenant compétent","activity",4,6),N("R12","Lettre d’offre et conditions suspensives","Intervenant compétent","activity",5,6),
+N("R15","Décision favorable et offre préparée","Vers Contractualisation","exit",4,7),N("R13","Présentation de l’offre au client","Gestionnaire","activity",5,7)],
+edges:[E("R0","R1"),E("R1","R2"),E("R2","R3","Standard"),E("R2","R4","Dérogation"),E("R2","R7","Agrément"),E("R3","R9"),E("R4","R5"),E("R5","R6"),E("R6","R9"),E("R7","R8"),E("R8","R9"),E("R9","R10","Oui"),E("R10","R11"),E("R11","R12"),E("R12","R13"),E("R13","R15"),E("R9","R14","Non",true)]},
+
+{title:"Contractualisation",desc:"Génération, contrôle, signature physique et transmission du contrat.",actors:["Gestionnaire","Client","Contrôle ponctuel"],tools:"Excel · Credex · Email",input:"Décision favorable et offre préparée",output:"Contrat signé et transmis",note:"La Conformité n’est pas un acteur systématique du parcours nominal. La signature reste physique dans le processus actuel.",cols:6,
+nodes:[N("C0","Décision favorable et offre préparée","Crédit / Agence","entry",1,1),N("C1","Génération du contrat via Excel / Credex","Gestionnaire","activity",2,1),N("C2","Revalidation des pièces obligatoires","Intervenant compétent","activity",3,1),N("C3","Contrôle de conformité du dossier","Intervenant compétent","activity",4,1),N("C4","Dossier complet et conforme ?","Décision","decision",5,1),N("C8","Signature physique du contrat","Client","activity",6,1),
+N("C7","Régularisation du dossier","Gestionnaire","exception",3,2),N("C6","Retour au gestionnaire","Intervenant compétent","exception",4,2),N("C5","Mise en suspens du dossier","Intervenant compétent","exception",5,2),N("C9","Transmission du dossier signé","Gestionnaire","activity",6,2),
+N("C10","Contrat signé et transmis","Vers Mise en place & décaissement","exit",6,3)],
+edges:[E("C0","C1"),E("C1","C2"),E("C2","C3"),E("C3","C4"),E("C4","C8","Oui"),E("C8","C9"),E("C9","C10"),E("C4","C5","Non",true),E("C5","C6","",true),E("C6","C7","",true),E("C7","C2","Retour",true)]},
+
+{title:"Mise en place & décaissement",desc:"Contrôle préalable, création dans Amplitude et décaissement.",actors:["Chargé de la libération crédit","Gestionnaire","Client"],tools:"Amplitude (CBS)",input:"Contrat signé et transmis",output:"Prêt créé et fonds décaissés",note:"Le losange et la boucle vers le contrôle final formalisent le contrôle préalable. Le circuit opérationnel exact de régularisation reste à confirmer.",cols:5,
+nodes:[N("M0","Contrat signé et transmis","Gestionnaire / Libération","entry",1,1),N("M1","Réception du dossier signé","Chargé de la libération","activity",2,1),N("M2","Contrôle final du dossier, des pièces et conditions","Chargé de la libération","activity",3,1),N("M3","Dossier prêt pour décaissement ?","Décision","decision",4,1),N("M5","Création du crédit dans Amplitude (CBS)","Chargé de la libération","activity",5,1),
+N("M4","Régularisation des éléments manquants","À confirmer","exception",4,2),N("M6","Décaissement des fonds sur le compte client","Chargé de la libération","activity",5,2),
+N("M7","Notification du client","Gestionnaire","activity",5,3),N("M8","Prêt créé et fonds décaissés","Vers Monitoring documentaire","exit",4,3)],
+edges:[E("M0","M1"),E("M1","M2"),E("M2","M3"),E("M3","M5","Oui"),E("M5","M6"),E("M6","M7"),E("M7","M8"),E("M3","M4","Non",true),E("M4","M2","Retour",true)]},
+
+{title:"Monitoring documentaire post-libération",desc:"Contrôle des documents numérisés et actualisation du suivi Credex.",actors:["Agence","Siège","Responsabilités à confirmer"],tools:"Credex · Documents numérisés",input:"Prêt créé et fonds décaissés",output:"Suivi documentaire actualisé",note:"Toutes les pièces requises sont contrôlées avant décaissement. Le post-libération traite surtout les documents non ou mal numérisés. Les originaux restent en agence. Pas de relance systématique à J+30.",cols:6,
+nodes:[N("P0","Prêt créé et fonds décaissés","Libération crédit / Conservation","entry",1,1),N("P2","Suivi de la numérisation des documents","Agence / siège","activity",2,1),N("P3","Vérification des documents scannés","Siège","activity",3,1),N("P4","Documents correctement numérisés ?","Décision","decision",4,1),N("P8","Mise à jour du monitoring Credex","Responsabilité à confirmer","activity",5,1),N("P9","Suivi documentaire actualisé","Fin du périmètre","exit",6,1),
+N("P6","Régularisation de la numérisation en agence","Agence","exception",3,2),N("P5","Signalement d’une anomalie","Responsabilité à confirmer","exception",4,2),
+N("P7","Conservation des originaux en agence","Agence","activity",2,3)],
+edges:[E("P0","P2"),E("P2","P3"),E("P3","P4"),E("P4","P8","Oui"),E("P8","P9"),E("P4","P5","Non",true),E("P5","P6","",true),E("P6","P3","Retour",true),E("P2","P7","En parallèle"),E("P7","P8")]}
+];
+
+/* ---------- Icônes (traits 24x24) ---------- */
+const P={
+ enter:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/>',
+ doc:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.6c2.4.6 4 2.3 4 5.4"/>',
+ layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+ shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+ card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ db:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+ excel:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/>',
+ bank:'<path d="M3 10l9-6 9 6"/><path d="M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/>',
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+ scale:'<path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/>',
+ calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>',
+ chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/>',
+ check:'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+ search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/>',
+ alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',
+ pause:'<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',
+ back:'<path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',
+ pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+ money:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/>',
+ scan:'<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M4 12h16"/>',
+ archive:'<rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"/>',
+ send:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+ bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>',
+ refresh:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',
+ tag:'<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><path d="M7.5 7.5h.01"/>',
+ gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 9 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 9h.1a2 2 0 1 1 0 4z"/>'
+};
+const RULES=[
+ [/suspens/i,"pause"],[/retour|régularis/i,"back"],[/anomalie|défavorable/i,"alert"],
+ [/excel/i,"excel"],[/email|transmission|transmis/i,"mail"],[/kyc|collecte/i,"layers"],[/agrément/i,"shield"],
+ [/domiciliation|salaire/i,"card"],[/ancienneté/i,"cal"],[/portefeuille|plafond|npl|incident/i,"db"],
+ [/n\+1|comité|validation commerciale|orientation/i,"users"],[/agence/i,"bank"],[/scoring/i,"chart"],
+ [/simulation|capacité|calcul|montant|taux|frais/i,"calc"],[/garantie|conformité|contrôle|vérification|complétude|validation/i,"check"],
+ [/signature|signé|contrat/i,"pen"],[/décaiss|fonds|crédit dans|amplitude/i,"money"],[/numéris|scann/i,"scan"],
+ [/conservation|originaux/i,"archive"],[/notification|présentation/i,"bell"],[/monitoring|mise à jour/i,"refresh"],
+ [/proposition|offre|lettre/i,"doc"],[/qualification|réception/i,"search"],[/besoin|expression/i,"user"],[/formalisation|confirmation/i,"tag"]
+];
+const svgIc=k=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${P[k]}</svg>`;
+const icon=n=>{let k=n.type==="entry"||n.type==="exit"?"enter":n.type==="decision"?"scale":"gear";
+  if(k==="gear"){for(const [r,v] of RULES){if(r.test(n.label)){k=v;break}}}
+  return svgIc(k)};
+
+/* ---------- Helpers ---------- */
+const $=s=>document.querySelector(s);
+const pad=i=>String(i+1).padStart(2,"0");
+const TYPE={entry:"Entrée",exit:"Sortie",decision:"Décision",exception:"Exception",activity:"Activité"};
+let cur=0,inDetail=false;
+
+/* ---------- Macro ---------- */
+function renderMacro(){
+  if(losOn)return renderLosMacro();
+  const cnt=t=>steps.reduce((a,s)=>a+s.nodes.filter(n=>n.type===t).length,0);
+  const nEx=steps.reduce((a,s)=>a+s.edges.filter(e=>e.reg).length,0);
+  $("#kpis").innerHTML=[[steps.length,"Phases"],[cnt("activity"),"Activités"],[cnt("decision"),"Décisions"],[nEx,"Flux de retour"]].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#chevrons").innerHTML=steps.map((s,i)=>`<button type="button" class="chev ${i===cur?"on":""}" data-i="${i}"><b>${pad(i)}</b>${s.title}</button>`).join("");
+  $("#cards").innerHTML=steps.map((s,i)=>{const a=s.nodes.filter(n=>n.type==="activity").length;
+    return `<button type="button" class="card" data-i="${i}"><span class="num">${pad(i)}</span><h2>${s.title}</h2><p>${s.desc}</p><div class="meta">${a} activités · ${s.actors.length} acteurs<em>Explorer →</em></div></button>`}).join("");
+  document.querySelectorAll("#chevrons .chev,#cards .card").forEach(b=>b.addEventListener("click",()=>open(+b.dataset.i)));
+  $("#crumbs").innerHTML=`<span>Parcours crédit Retail</span>`;
+}
+
+/* ---------- Détail ---------- */
+function open(i){cur=Math.max(0,Math.min(steps.length-1,i));inDetail=true;history.replaceState(null,"","#phase-"+(cur+1)+(losOn?"-los":""));show()}
+function home(){inDetail=false;history.replaceState(null,"",location.pathname+(losOn?"#los":""));show()}
+function show(){$("#vMacro").classList.toggle("on",!inDetail);$("#vDetail").classList.toggle("on",inDetail);inDetail?renderDetail():renderMacro();window.scrollTo({top:0})}
+const EMPTY=`<p class="empty">Cliquez sur une activité du schéma pour afficher son détail.</p>`;
+function renderDetail(){
+  if(losOn)return renderLosDetail();
+  $("#graph").classList.remove("los-graph");
+  const s=steps[cur];
+  $("#crumbs").innerHTML=`<button type="button" id="cHome">Parcours crédit Retail</button><span>/</span><span>${pad(cur)} · ${s.title}</span>`;
+  $("#cHome").addEventListener("click",home);
+  $("#dNum").textContent=pad(cur);$("#dTitle").textContent=s.title;$("#dDesc").textContent=s.desc;
+  const nA=s.nodes.filter(n=>n.type==="activity").length,nD=s.nodes.filter(n=>n.type==="decision").length;
+  $("#ctx").innerHTML=[["Entrée",s.input],["Sortie",s.output],["Outils",s.tools],["Volume",`${nA} activités · ${nD} décision${nD>1?"s":""}`]].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+  $("#actors").innerHTML=s.actors.map(a=>`<span>${a}</span>`).join("");
+  $("#note").textContent=s.note;$("#sel").innerHTML=EMPTY;
+  $("#prev").disabled=cur===0;$("#next").disabled=cur===steps.length-1;
+
+  const g=$("#graph");g.querySelectorAll(".node,.lbl").forEach(x=>x.remove());
+  const rows=Math.max(...s.nodes.map(n=>n.row));
+  const decRows=new Set(s.nodes.filter(n=>n.type==="decision").map(n=>n.row));
+  g.style.gridTemplateColumns=`repeat(${s.cols},minmax(172px,1fr))`;
+  g.style.gridTemplateRows=Array.from({length:rows},(_,r)=>decRows.has(r+1)?"200px":"minmax(124px,auto)").join(" ");
+  g.style.minWidth=(s.cols*218)+"px";
+  s.nodes.forEach(n=>{
+    const el=document.createElement("button");el.type="button";el.className="node "+n.type;el.id="n-"+n.id;
+    el.style.gridColumn=n.col;el.style.gridRow=n.row;
+    const lab=n.type==="activity"||n.type==="exception"?`${TYPE[n.type]} · ${n.id}`:TYPE[n.type];
+    el.innerHTML=(n.type==="decision"?`<svg class="dia" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="50,1 99,50 50,99 1,50"/></svg>`:"")+
+      `<div class="hd">${icon(n)}<span class="t">${lab}</span></div><strong>${n.label}</strong>${n.type==="decision"?"":`<small>${n.actor}</small>`}`;
+    el.addEventListener("click",()=>select(n));g.appendChild(el);
+  });
+  requestAnimationFrame(()=>requestAnimationFrame(draw));
+}
+function select(n){
+  document.querySelectorAll(".node.sel").forEach(x=>x.classList.remove("sel"));$("#n-"+n.id).classList.add("sel");
+  const s=steps[cur],lab=id=>s.nodes.find(x=>x.id===id).label;
+  const prev=s.edges.filter(e=>e.to===n.id).map(e=>lab(e.from));
+  const next=s.edges.filter(e=>e.from===n.id).map(e=>(e.label?e.label+" → ":"")+lab(e.to));
+  $("#sel").innerHTML=`<p class="sel-title">${n.label}</p><div class="sel-meta"><b>Type :</b> ${TYPE[n.type]}<br><b>Acteur :</b> ${n.actor}${prev.length?`<br><b>Amont :</b> ${prev.join(" · ")}`:""}${next.length?`<br><b>Aval :</b> ${next.join(" · ")}`:""}</div>`;
+}
+
+/* ---------- Tracé des flux (orthogonal, coins arrondis) ---------- */
+function rounded(pts,r=10){
+  let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=1;i<pts.length-1;i++){
+    const [x0,y0]=pts[i-1],[x1,y1]=pts[i],[x2,y2]=pts[i+1];
+    const l1=Math.hypot(x1-x0,y1-y0),l2=Math.hypot(x2-x1,y2-y1),rr=Math.min(r,l1/2,l2/2);
+    if(rr<1){d+=`L${x1},${y1}`;continue}
+    d+=`L${x1-(x1-x0)/l1*rr},${y1-(y1-y0)/l1*rr}Q${x1},${y1} ${x1+(x2-x1)/l2*rr},${y1+(y2-y1)/l2*rr}`;
+  }
+  const L=pts[pts.length-1];return d+`L${L[0]},${L[1]}`;
+}
+function draw(){
+  if(losOn)return drawLos();
+  const s=steps[cur],g=$("#graph"),svg=$("#edges");
+  svg.innerHTML=`<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1L9,5L0,9Z" fill="#009DDF"/></marker><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1L9,5L0,9Z" fill="#EB5C2E"/></marker></defs>`;
+  g.querySelectorAll(".lbl").forEach(x=>x.remove());
+  const G=g.getBoundingClientRect();
+  const box=id=>{const r=$("#n-"+id).getBoundingClientRect();return{l:r.left-G.left,r:r.right-G.left,t:r.top-G.top,b:r.bottom-G.top,cx:r.left-G.left+r.width/2,cy:r.top-G.top+r.height/2}};
+  s.edges.forEach(e=>{
+    const A=box(e.from),B=box(e.to);let pts,lx,ly;
+    const sameRow=Math.abs(A.cy-B.cy)<4,sameCol=Math.abs(A.cx-B.cx)<4;
+    if(e.side){const x0=B.cx<A.cx?A.l:A.r;pts=[[x0,A.cy],[B.cx,A.cy],[B.cx,B.t]];lx=B.cx;ly=A.cy}
+    else if(sameRow){pts=B.l>=A.r?[[A.r,A.cy],[B.l,B.cy]]:[[A.l,A.cy],[B.r,B.cy]];lx=(pts[0][0]+pts[1][0])/2;ly=A.cy}
+    else if(sameCol){pts=B.t>=A.b?[[A.cx,A.b],[B.cx,B.t]]:[[A.cx,A.t],[B.cx,B.b]];lx=A.cx;ly=(pts[0][1]+pts[1][1])/2}
+    else if(B.t>=A.b){const y=B.t-26;pts=[[A.cx,A.b],[A.cx,y],[B.cx,y],[B.cx,B.t]];lx=B.cx;ly=y}
+    else{const x0=B.cx<A.cx?A.l:A.r;pts=[[x0,A.cy],[B.cx,A.cy],[B.cx,B.b]];lx=(x0+B.cx)/2;ly=A.cy}
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d",rounded(pts));p.setAttribute("fill","none");
+    p.setAttribute("stroke",e.reg?"#EB5C2E":"#009DDF");p.setAttribute("stroke-width","2");
+    if(e.reg)p.setAttribute("stroke-dasharray","6 5");
+    p.setAttribute("marker-end",`url(#${e.reg?"ar":"a"})`);svg.appendChild(p);
+    if(e.label){const l=document.createElement("span");
+      l.className="lbl"+(/^oui$/i.test(e.label)?" yes":/^non$/i.test(e.label)?" no":e.reg?" reg":"");
+      l.textContent=e.label;l.style.left=lx+"px";l.style.top=ly+"px";g.appendChild(l)}
+  });
+}
+
+/* =====================================================================
+   COUCHE LOS — parcours cible (source : 20260923_Retail_Process_Credit.pptx)
+   Par phase : losNodes (nodes), losEdges (edges), impactDetails (fx de chaque nœud)
+   Catégories : A Automatisé · B Transformé · C Validation humaine · D Conservé · E À confirmer
+   ===================================================================== */
+let losOn=false;
+function LN(id,label,actor,type,col,row,cat,o){return Object.assign({id,label,actor,type,col,row,cat:cat||null},o||{})}
+function LE(from,to,label,kind){return{from,to,label:label||"",kind:kind||"normal"}}
+const CAT={A:{label:"Automatisé"},B:{label:"Transformé"},C:{label:"Validation humaine"},D:{label:"Conservé"},E:{label:"À confirmer"}};
+const SRC="20260923_Retail_Process_Credit.pptx";
+
+const losSteps=[
+/* ---------------- PHASE 01 ---------------- */
+{impact:"Impact fort",summary:"Digitalisation et centralisation de l’initiation : données récupérées via Amplitude et dossier créé automatiquement.",
+seq:"Cible 1 · Demande de crédit",desc:"Demande saisie dans le système cible, préremplie depuis Amplitude, dossier créé avec une référence unique.",
+actors:"Client · Gestionnaire · Système cible (LOS) · Amplitude",
+before:"Collecte et saisie manuelles, fichier Excel, vérifications dans plusieurs systèmes, transmission et orientation par email.",
+after:"Demande enregistrée dans le LOS, données préremplies, dossier identifié et centralisé, référence générée automatiquement.",
+note:"Les contrôles employeur (agrément, plafond, NPL), de domiciliation et d’ancienneté ne disparaissent pas : ils sont repositionnés dans les règles d’éligibilité du scoring (phase 02), sous réserve du paramétrage effectif.",
+cols:5,
+out:[["D3 · Collecte des pièces KYC","Repositionnée : dépôt des pièces dans le dossier (T3-04, phase 03)"],["D4 · Agrément de l’employeur","Limites employeur dans les règles d’éligibilité si paramétrées (T2-04) ; agrément d’un nouvel employeur : à confirmer (phase 05)"],["D5 · D6 · Domiciliation, ancienneté","Repositionnées dans les règles d’éligibilité (T2-04)"],["D7 · Portefeuille, plafonds, NPL, incidents","Engagements et exposition analysés par le moteur (T2-02) ; NPL employeur : paramétrage à confirmer"],["D8 · Fichier Excel de demande","Remplacé par la saisie LOS (T1-02, T1-05) et la création automatique (T1-06)"],["D9 à D12 · Validation N+1, orientation, email","Remplacées par le workflow d’approbation (phase 05)"]],
+nodes:[
+LN("L1-IN","Besoin de financement du client","Client","entry",1,1),
+LN("T1-01","Initiation de la demande","Client / Gestionnaire","activity",2,1,"D",{cat2:"B",fx:{
+ bActor:"Client · Gestionnaire",bDesc:"Le client exprime son besoin en agence ; le gestionnaire qualifie la demande puis enchaîne sur la collecte des pièces KYC (D1, D2, D3).",
+ aActor:"Client · Gestionnaire",aDesc:"Le client exprime son besoin ; le gestionnaire qualifie la demande avant de l’enregistrer dans le système cible. La slide 14 mentionne aussi une initiation par le client lui-même (« ou »).",
+ how:["Pas de traitement système à ce stade : l’échange reste humain.","La qualification conditionne la création de la demande dans le LOS (T1-02)."],
+ human:["Écoute du besoin et conseil.","Qualification du type de financement recherché."],
+ ben:["Qualification immédiatement suivie d’une saisie structurée, sans support intermédiaire."],
+ lim:["Canal d’initiation directe par le client non détaillé : à confirmer.","La collecte KYC n’a plus lieu ici : les pièces sont déposées à l’étape documentaire (T3-04)."],src:"Slides 13, 14, 19"}}),
+LN("T1-02","Enregistrement de la demande dans le LOS","Gestionnaire","activity",3,1,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Les informations sont saisies manuellement dans un fichier Excel de demande (D8), transmis ensuite au N+1 puis au siège par email.",
+ aActor:"Gestionnaire · Système cible",aDesc:"Le gestionnaire crée une nouvelle demande directement dans le système cible et renseigne les premières informations du financement souhaité.",
+ how:["Création d’une nouvelle demande dans le LOS.","Saisie des premières informations du financement.","Déclenchement de l’identification du client (T1-03)."],
+ human:["Saisie initiale de la demande.","Relecture des informations saisies."],
+ ben:["Fin du fichier Excel comme support d’entrée.","Demande tracée dès sa création."],
+ lim:["Écran de saisie et champs obligatoires non décrits dans le support."],src:"Slide 14"}}),
+LN("T1-03","Identification du client et de son compte","Système cible (LOS)","activity",4,1,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le gestionnaire recherche lui-même les informations du client et de sa relation bancaire avant de les reporter dans le dossier.",
+ aActor:"Système cible (LOS)",aDesc:"Le système identifie le client à partir des référentiels existants et récupère son profil bancaire, ses comptes et sa relation avec la banque.",
+ how:["Recherche du client dans les référentiels.","Rattachement du compte concerné.","Récupération du profil et de la relation bancaire."],
+ human:["Confirmation de l’identité du client.","Choix du bon compte en cas de comptes multiples."],
+ ben:["Moins de recherches manuelles.","Rattachement fiable entre la demande et le client."],
+ lim:["Dépend de la qualité des référentiels clients.","Règles de rapprochement non décrites."],src:"Slide 14"}}),
+LN("T1-04","Préremplissage via API Amplitude","LOS · Amplitude","activity",5,1,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le gestionnaire consulte les informations disponibles et renseigne manuellement certaines données du dossier de crédit.",
+ aActor:"Système cible (LOS) · Amplitude",aDesc:"Le système récupère automatiquement les informations disponibles dans Amplitude via API (identité, adresse et coordonnées, employeur, informations bancaires) et préremplit les champs concernés.",
+ how:["Identification du client.","Récupération des informations dans Amplitude.","Préremplissage des champs.","Association au dossier."],
+ human:["Vérification des informations.","Correction des incohérences.","Complément des données manquantes."],
+ ben:["Réduction des ressaisies.","Moins de risques d’erreurs de transcription.","Meilleure continuité des données."],
+ lim:["Qualité des données Amplitude.","Disponibilité des interfaces.","Périmètre exact des champs."],src:"Slide 14"}}),
+LN("T1-05","Paramétrage de la demande","Gestionnaire","activity",5,2,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Montant, durée et caractéristiques du crédit sont renseignés dans le fichier Excel ; une première simulation est faite par le gestionnaire (S0).",
+ aActor:"Gestionnaire · Système cible",aDesc:"Le gestionnaire sélectionne dans le LOS le type de prêt, le montant souhaité, la durée, la devise et les options applicables au produit.",
+ how:["Sélection du produit et des paramètres dans le système.","Enregistrement des paramètres dans le dossier, réutilisés par le scoring et le contrat."],
+ human:["Choix du produit adapté au besoin.","Saisie du montant, de la durée et de la devise."],
+ ben:["Paramètres structurés et réutilisables.","Moins d’écarts entre la demande et les conditions finales."],
+ lim:["Catalogue produits et options effectivement paramétrés : à confirmer."],src:"Slides 14, 19"}}),
+LN("T1-06","Création automatique du dossier","Système cible (LOS)","activity",4,2,"A",{fx:{
+ bActor:"Gestionnaire · Gérant d’agence / N+1",bDesc:"Le dossier existe sous forme de fichier Excel et de pièces ; il est validé par le N+1 puis orienté vers l’agence ou le siège par email (D9 à D12).",
+ aActor:"Système cible (LOS)",aDesc:"Le système crée le dossier de crédit, génère une référence unique, l’associe au client et prépare les étapes de collecte documentaire et d’analyse.",
+ how:["Création du dossier.","Attribution d’une référence unique.","Association au client.","Préparation de la suite de l’instruction."],
+ human:["Aucune intervention requise pour la création elle-même."],
+ ben:["Dossier unique et centralisé.","Traçabilité dès l’initiation.","Fin des transmissions par email."],
+ lim:["L’orientation agence / siège n’est plus portée ici : elle relève du workflow d’approbation (phase 05)."],src:"Slide 14"}}),
+LN("L1-OUT","Dossier créé avec référence unique","Vers phase 03 · Données et documents","exit",3,2)],
+edges:[LE("L1-IN","T1-01"),LE("T1-01","T1-02"),LE("T1-02","T1-03"),LE("T1-03","T1-04"),LE("T1-04","T1-05"),LE("T1-05","T1-06"),LE("T1-06","L1-OUT")]},
+
+/* ---------------- PHASE 02 ---------------- */
+{impact:"Impact fort",summary:"Calculs, règles d’éligibilité et scoring automatisés par le système cible ; la décision reste soumise aux délégations.",
+seq:"Cible 4 · Scoring — après la revue documentaire (phase 03)",desc:"Analyse du profil, calculs financiers, règles d’éligibilité et score produits par le système cible.",
+actors:"Système cible (LOS) · Moteur de scoring · Gestionnaire",
+before:"Simulation initiale du gestionnaire, simulation finale de l’analyste, scoring et vérifications largement manuels.",
+after:"Calculs automatisés, scoring intégré, analyse disponible dans le workflow.",
+note:"Le scoring automatique ne rend pas la décision de crédit automatique : la validation reste soumise aux règles de délégation (phase 05). Dans la séquence cible, le scoring intervient après la vérification des données et la revue documentaire.",
+cols:5,
+out:[["S0 · S2 · Simulations gestionnaire et analyste","Remplacées par le calcul automatique (T2-03)"],["S1 · Portefeuille employeur et incidents","Engagements et exposition (T2-02) ; NPL employeur : paramétrage à confirmer"],["S3 · Capacité de remboursement","Calculée par le système (T2-03)"],["S4 · S5 · Ancienneté, domiciliation, salaire","Règles d’éligibilité intégrées (T2-04)"],["S6 · Modèle de scoring Retail (Excel)","Score produit par le système (T2-05)"],["S7 · Montant, durée, taux proposés","Déplacée : conditions déterminées par le moteur de règles (T4-02, phase 04)"],["Rôle de l’analyste crédit","Non mentionné dans le workflow cible : probablement couvert mais non démontré (slide 20)"]],
+nodes:[
+LN("L2-IN","Dossier documentaire contrôlé","Depuis phase 03 (séquence cible)","entry",1,1),
+LN("T2-01","Récupération des informations nécessaires au scoring","Système cible (LOS)","activity",2,1,"A",{fx:{
+ bActor:"Analyste crédit",bDesc:"L’analyste reprend les données du dossier transmis (fichier Excel, pièces) avant de simuler et de scorer.",
+ aActor:"Système cible (LOS)",aDesc:"Le système exploite directement les données du client et de la demande déjà présentes dans le dossier.",
+ how:["Lecture des données client préremplies puis vérifiées (phases 01 et 03).","Lecture des paramètres de la demande (T1-05)."],
+ human:["Aucune ressaisie attendue."],
+ ben:["Suppression des ressaisies entre gestionnaire et analyste.","Données identiques d’une étape à l’autre."],
+ lim:["La qualité du score dépend de la qualité des données en amont."],src:"Slides 13, 16"}}),
+LN("T2-02","Analyse du profil client","LOS · Moteur de scoring","activity",3,1,"A",{fx:{
+ bActor:"Analyste crédit",bDesc:"L’analyste vérifie le portefeuille employeur, les incidents client et les engagements (S1) puis apprécie le profil.",
+ aActor:"Système cible · Moteur de scoring",aDesc:"Le moteur prend en compte le profil du client, le nouveau prêt, la capacité de remboursement, les engagements existants et l’exposition globale.",
+ how:["Analyse du profil client et du montant demandé.","Contrôle de l’endettement total et des engagements existants.","Calcul de l’exposition globale."],
+ human:["Appropriation du résultat par le gestionnaire (T2-06)."],
+ ben:["Analyse homogène d’un dossier à l’autre.","Vision consolidée de l’exposition du client."],
+ lim:["Intégration du NPL employeur et des incidents client dans le moteur : à confirmer."],src:"Slides 16, 19"}}),
+LN("T2-03","Calcul des principaux critères financiers","Système cible (LOS)","activity",4,1,"A",{fx:{
+ bActor:"Gestionnaire · Analyste crédit",bDesc:"Première simulation par le gestionnaire (S0), puis simulation finale et calcul de la capacité de remboursement par l’analyste (S2, S3).",
+ aActor:"Système cible (LOS)",aDesc:"Le système calcule revenus, capacité de remboursement, endettement, ratio mensualité / salaire net et, si le modèle applicable le prévoit, le flux de crédit sur 3 mois rapporté au salaire net.",
+ how:["Calcul de la capacité de remboursement.","Ratio mensualité / salaire net.","Ratio flux de crédit 3 mois / salaire net, selon le modèle."],
+ human:["Examen des cas atypiques lors de la décision."],
+ ben:["Une seule simulation au lieu de deux.","Calculs reproductibles et tracés."],
+ lim:["Formules et pondérations du modèle non détaillées dans le support."],src:"Slide 19"}}),
+LN("T2-04","Vérification des règles d’éligibilité intégrées","Système cible (LOS)","activity",5,1,"A",{status:"Sous réserve du paramétrage",fx:{
+ bActor:"Gestionnaire puis analyste crédit",bDesc:"Ancienneté, domiciliation du salaire et situation de l’employeur sont vérifiées deux fois : en agence (D4 à D7) puis par l’analyste (S4, S5).",
+ aActor:"Système cible (LOS)",aDesc:"Le système contrôle les critères prévus : âge, ancienneté, salaire, historique de domiciliation, exposition et limites employeur lorsqu’elles sont paramétrées.",
+ how:["Âge : 20 à 65 ans.","Ancienneté : au moins 12 mois.","Historique : 3 mois de salaire crédité.","Salaire minimum : critère cité, seuil non précisé.","Limites employeur (NPL banque / agence, exposition max.) : si paramétrées."],
+ human:["Traitement des cas hors règles dans le circuit de décision (phase 05)."],
+ ben:["Fin du double contrôle agence / analyste.","Règles appliquées de façon identique à tous les dossiers."],
+ lim:["Montant du salaire minimum non documenté.","Seuils NPL employeur non documentés.","Agrément d’un nouvel employeur : traitement cible à confirmer."],src:"Slide 19"}}),
+LN("T2-05","Production automatique du score","Système cible (LOS)","activity",5,2,"A",{fx:{
+ bActor:"Analyste crédit",bDesc:"Application du modèle de scoring Retail via fichier Excel (S6), puis validation du scoring lors du contrôle d’éligibilité (E7).",
+ aActor:"Système cible (LOS)",aDesc:"Le système calcule le score et une recommandation initiale associée à un niveau de risque.",
+ how:["Calcul du score.","Attribution d’un niveau de risque.","Recommandation initiale."],
+ human:["Le score éclaire la décision sans la remplacer : validation selon délégation (phase 05)."],
+ ben:["Fin du fichier Excel de scoring.","Résultat disponible immédiatement dans le workflow."],
+ lim:["La validation du score par un analyste n’apparaît plus : rôle de l’analyste crédit non démontré (slide 20)."],src:"Slides 13, 16, 20"}}),
+LN("T2-06","Mise à disposition du résultat","LOS · Gestionnaire","activity",4,2,"B",{fx:{
+ bActor:"Analyste crédit",bDesc:"Le résultat reste dans les fichiers de l’analyste et circule au fil des échanges.",
+ aActor:"Système cible · Gestionnaire",aDesc:"Le gestionnaire consulte dans le LOS le score, le profil de risque, la capacité de remboursement, l’exposition globale et les éléments utiles à la décision.",
+ how:["Restitution du résultat dans le dossier.","Accès partagé au gestionnaire."],
+ human:["Prise de connaissance du résultat.","Préparation de l’échange avec le client."],
+ ben:["Information partagée sans transmission manuelle."],
+ lim:["Contenu exact de l’écran de restitution à confirmer."],src:"Slides 13, 16"}}),
+LN("L2-OUT","Score et recommandation disponibles","Vers phase 04 · Conditions","exit",3,2)],
+edges:[LE("L2-IN","T2-01"),LE("T2-01","T2-02"),LE("T2-02","T2-03"),LE("T2-03","T2-04"),LE("T2-04","T2-05"),LE("T2-05","T2-06"),LE("T2-06","L2-OUT")]},
+
+/* ---------------- PHASE 03 ---------------- */
+{impact:"Impact fort",summary:"Contrôle automatique des données, revue documentaire par agent IA et gestion humaine des exceptions.",
+seq:"Cibles 2 et 3 · Données démographiques et revue documentaire — avant le scoring",desc:"Données client vérifiées et contrôlées, pièces déposées puis analysées par un agent IA, exceptions revues par le gestionnaire.",
+actors:"Gestionnaire · Client · Système cible (LOS) · Agent IA",
+before:"Complétude et pièces vérifiées par l’analyste ; en cas d’anomalie, mise en suspens et retour par email au gestionnaire.",
+after:"Contrôles de données automatiques, revue documentaire par agent IA, boucle de complément intégrée au parcours.",
+note:"L’agent IA n’est pas un dispositif de certification de documents. La couverture de l’ensemble des contrôles réglementaires n’est pas démontrée. Dans la séquence cible, cette phase précède le scoring.",
+cols:5,
+out:[["E1 · E2 · Complétude et pièces justificatives","Contrôle par l’agent IA (T3-05)"],["E3 · Documents complets et conformes ?","Décision T3-06 sur le résultat du contrôle IA"],["E4 à E6 · Suspens, email, régularisation","Boucle intégrée : revue, complément, nouveau dépôt (T3-07 à T3-09)"],["E7 · Validation du scoring","N’apparaît plus comme étape distincte : score produit par le système (T2-05), décision selon délégation (phase 05)"],["E8 · Montant, durée et taux","Déterminés par le moteur de règles (T4-02, phase 04)"],["E9 · Exceptions et dérogations","Exceptions documentaires : T3-07 ; dérogations crédit : couverture à confirmer (phase 05)"]],
+nodes:[
+LN("L3-IN","Dossier créé dans le LOS","Depuis phase 01","entry",1,1),
+LN("T3-01","Vérification des données démographiques","Gestionnaire · LOS","activity",2,1,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Pas d’étape dédiée : les informations client sont recoupées au fil de la collecte KYC et de la préparation du fichier Excel.",
+ aActor:"Gestionnaire · Système cible",aDesc:"Les informations personnelles préremplies sont vérifiées pour s’assurer qu’elles sont complètes, exactes et à jour ; les autorisations requises sont renseignées (slide 13).",
+ how:["Présentation des données préremplies depuis Amplitude pour vérification."],
+ human:["Vérification des informations avec le client."],
+ ben:["Données fiabilisées avant toute analyse."],
+ lim:["Règles d’actualisation des données non précisées."],src:"Slides 13, 15"}}),
+LN("T3-02","Mise à jour des informations","Gestionnaire","activity",2,2,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Les corrections interviennent au fil des échanges, sans étape formalisée.",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire corrige ou enrichit les données manquantes, inexactes ou obsolètes.",
+ how:["Modification des champs dans le dossier LOS."],
+ human:["Correction et enrichissement des données."],
+ ben:["Corrections faites en amont du scoring."],
+ lim:["Répercussion des mises à jour dans Amplitude : à confirmer (slide 19)."],src:"Slides 15, 19"}}),
+LN("T3-03","Contrôle automatique des données","Système cible (LOS)","activity",3,1,"A",{fx:{
+ bActor:"Gestionnaire · Analyste crédit",bDesc:"Cohérence des informations vérifiée manuellement, à plusieurs reprises, par le gestionnaire puis l’analyste.",
+ aActor:"Système cible (LOS)",aDesc:"Le système vérifie automatiquement la cohérence, l’exhaustivité et la conformité des données saisies.",
+ how:["Contrôle de cohérence.","Contrôle d’exhaustivité.","Contrôle de conformité des informations."],
+ human:["Correction des anomalies signalées."],
+ ben:["Erreurs détectées avant l’analyse.","Moins d’allers-retours."],
+ lim:["Liste des contrôles paramétrés non détaillée."],src:"Slide 15"}}),
+LN("T3-04","Dépôt des pièces justificatives","Client · Gestionnaire","activity",4,1,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le gestionnaire collecte les pièces KYC et justificatifs en agence (D3), puis les transmet avec le dossier.",
+ aActor:"Client · Gestionnaire · Système cible",aDesc:"Les documents requis sont transmis et intégrés au dossier dans le système cible.",
+ how:["Intégration des pièces au dossier LOS.","Déclenchement du contrôle par l’agent IA (T3-05)."],
+ human:["Remise des pièces par le client.","Ajout au dossier par le gestionnaire, le cas échéant."],
+ ben:["Pièces centralisées et rattachées au dossier."],
+ lim:["Modalité de dépôt (numérisation en agence ou dépôt direct par le client) à confirmer."],src:"Slides 13, 15"}}),
+LN("T3-05","Contrôle documentaire par agent IA","Agent IA","activity",5,1,"A",{fx:{
+ bActor:"Analyste crédit",bDesc:"L’analyste vérifie la complétude du dossier et contrôle les pièces (E1, E2) ; les pièces sont revalidées à la contractualisation (C2).",
+ aActor:"Agent IA",aDesc:"Un agent IA analyse automatiquement les pièces justificatives : présence, complétude, qualité, conformité apparente et incohérences détectables selon ses capacités.",
+ how:["Présence des documents.","Complétude.","Qualité.","Conformité apparente.","Incohérences détectables."],
+ human:["Revue des cas signalés en exception ou en doute (T3-07)."],
+ ben:["Contrôle documentaire plus rapide.","Réduction des revues répétitives.","Meilleure détection des pièces manquantes."],
+ lim:["Ne certifie pas l’authenticité d’un document.","Couverture de tous les contrôles réglementaires non démontrée.","Résultat dépendant de la qualité des numérisations."],src:"Slides 15, 19, 20"}}),
+LN("T3-06","Documents complets et conformes ?","Décision","decision",5,2,null,{fx:{
+ bActor:"Analyste crédit",bDesc:"Décision de l’analyste (E3) ; en cas de non-conformité, suspens et retour par email.",
+ aActor:"Agent IA · Gestionnaire",aDesc:"Selon le résultat du contrôle IA : poursuite si les pièces sont conformes, revue humaine en cas d’anomalie ou de doute.",
+ how:["Oui : dossier documentaire contrôlé.","Non ou doute : revue manuelle (T3-07)."],human:["Arbitrage des cas douteux."],ben:["Les dossiers conformes ne sont plus revus manuellement."],lim:["Seuil de confiance déclenchant une revue humaine non précisé."],src:"Slide 15"}}),
+LN("T3-07","Revue manuelle des exceptions","Gestionnaire","activity",4,2,"C",{fx:{
+ bActor:"Analyste crédit",bDesc:"L’analyste met le dossier en suspens et le renvoie par email au gestionnaire (E4, E5).",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire examine les anomalies, incohérences ou cas non traités automatiquement.",
+ how:["Anomalies mises en évidence par l’agent IA."],
+ human:["Analyse de l’anomalie.","Décision de demander un complément."],
+ ben:["L’intervention humaine se concentre sur les vrais cas d’exception."],
+ lim:["Volume de cas en exception inconnu à ce stade.","Habilitations de revue à préciser."],src:"Slides 15, 19"}}),
+LN("T3-08","Demande de complément","Gestionnaire · Client","activity",3,2,"B",{fx:{
+ bActor:"Analyste crédit · Gestionnaire",bDesc:"Retour par email au gestionnaire, qui recontacte le client pour régulariser (E5, E6).",
+ aActor:"Gestionnaire · Client",aDesc:"Le gestionnaire demande au client les documents manquants ou corrigés.",
+ how:["Boucle de retour intégrée au parcours cible."],
+ human:["Échange avec le client."],
+ ben:["Demande tracée dans le dossier, sans email intermédiaire avec le siège."],
+ lim:["Canal de notification au client non précisé."],src:"Slides 15, 19"}}),
+LN("T3-09","Nouveau dépôt documentaire","Client · Gestionnaire","activity",3,3,"B",{fx:{
+ bActor:"Gestionnaire · Client",bDesc:"Régularisation des documents puis renvoi du dossier à l’analyste (E6).",
+ aActor:"Client · Gestionnaire",aDesc:"Les documents corrigés sont ajoutés au dossier, puis à nouveau contrôlés par l’agent IA.",
+ how:["Ajout des documents au dossier.","Relance du contrôle documentaire (T3-05)."],
+ human:["Fourniture des documents corrigés."],
+ ben:["Boucle courte, sans resaisie du dossier."],
+ lim:["Nombre de boucles autorisées et délais non précisés."],src:"Slide 15"}}),
+LN("L3-OUT","Dossier documentaire contrôlé","Vers phase 02 · Scoring","exit",5,3)],
+edges:[LE("L3-IN","T3-01"),LE("T3-01","T3-03","Sinon"),LE("T3-01","T3-02","Correction nécessaire"),LE("T3-02","T3-03"),LE("T3-03","T3-04"),LE("T3-04","T3-05"),LE("T3-05","T3-06"),LE("T3-06","L3-OUT","Oui"),
+ LE("T3-06","T3-07","Non / doute","loop"),LE("T3-07","T3-08","","loop"),LE("T3-08","T3-09","","loop"),LE("T3-09","T3-05","Nouveau contrôle","loop")]},
+
+/* ---------------- PHASE 04 ---------------- */
+{impact:"Impact fort",summary:"Conditions alimentées par le scoring et le moteur de règles, présentées au client ; formalisation des garanties à confirmer.",
+seq:"Cible 5 · Acceptation des conditions de crédit",desc:"Conditions déterminées par le moteur de règles, revues si nécessaire, présentées au client qui accepte ou demande une modification.",
+actors:"Gestionnaire · Client · Moteur de règles · Autorité compétente",
+before:"Proposition commerciale préparée manuellement (montant, durée, taux, frais, commissions, garanties).",
+after:"Conditions calculées à partir de données centralisées, cohérentes avec le scoring, tracées et présentées au client.",
+note:"La formalisation des garanties envisagées et des conditions clés n’est pas visible dans la cible (slide 20). L’articulation entre acceptation client et validation selon délégation reste à confirmer : la slide 13 place la validation avant les conditions, la slide 16 décrit l’acceptation puis le réexamen.",
+cols:5,
+out:[["O1 · Élaboration de la proposition","Conditions déterminées par le moteur de règles (T4-02)"],["O2 · O3 · Montant, durée, taux, frais","Couverts par la génération des T&C (T4-02)"],["O4 · Garanties envisagées, conditions clés","Couverture à confirmer (T4-G)"],["O5 · Consolidation","Revue des conditions lorsque nécessaire (T4-03)"]],
+nodes:[
+LN("L4-IN","Score et recommandation","Depuis phase 02","entry",1,1),
+LN("T4-01","Consultation du résultat de scoring","Gestionnaire","activity",2,1,"B",{fx:{
+ bActor:"Analyste crédit",bDesc:"L’analyste détermine puis confirme montant, durée et taux à partir de sa simulation (S7, E8).",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire prend connaissance des résultats de l’analyse dans le LOS.",
+ how:["Restitution du score et du profil de risque dans le dossier."],
+ human:["Lecture et compréhension du résultat."],
+ ben:["Le gestionnaire dispose de la même information que le décideur."],
+ lim:["Contenu exact de la restitution à confirmer."],src:"Slide 16"}}),
+LN("T4-02","Détermination des conditions de financement","LOS · Moteur de règles","activity",3,1,"A",{status:"Pour les règles documentées",fx:{
+ bActor:"Analyste crédit · Intervenant compétent",bDesc:"Proposition commerciale élaborée manuellement : montant, durée, taux, frais et commissions (O1 à O3, fichier Excel).",
+ aActor:"Système cible · Moteur de règles",aDesc:"Les conditions sont déterminées selon le profil de risque, le montant, la durée, le taux, la capacité de remboursement, les règles de tarification et les conditions particulières applicables.",
+ how:["Moteur de règles d’éligibilité et de tarification (slide 19).","Tarification au risque.","Prise en compte du niveau de délégation compétent (slide 13)."],
+ human:["Revue lorsque nécessaire (T4-03)."],
+ ben:["Meilleure cohérence entre scoring et tarification.","Réduction de la préparation manuelle.","Conditions proposées tracées."],
+ lim:["Grille tarifaire et règles détaillées non décrites.","Dérogation tarifaire : justification et validateur tracés selon slide 19, circuit à confirmer."],src:"Slides 13, 16, 19"}}),
+LN("T4-03","Revue des conditions proposées","Gestionnaire ou autorité compétente","activity",4,1,"C",{fx:{
+ bActor:"Analyste crédit · Intervenant compétent",bDesc:"Consolidation de la proposition commerciale (O5).",
+ aActor:"Gestionnaire ou autorité compétente",aDesc:"Les conditions proposées sont examinées lorsque nécessaire avant leur présentation au client.",
+ how:["Conditions proposées par le moteur mises à disposition pour revue."],
+ human:["Examen des conditions.","Ajustement dans la limite des habilitations."],
+ ben:["Contrôle humain conservé sur les conditions sensibles."],
+ lim:["Critères déclenchant une revue non documentés."],src:"Slides 13, 16"}}),
+LN("T4-04","Présentation des conditions au client","Gestionnaire","activity",5,1,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Offre présentée au client après la décision (R13), avec lettre d’offre et conditions suspensives.",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire communique au client les conditions proposées : montant, durée, taux, garanties et autres conditions particulières.",
+ how:["Conditions issues du dossier LOS."],
+ human:["Explication des conditions au client."],
+ ben:["Conditions présentées identiques à celles calculées."],
+ lim:["Lettre d’offre et conditions suspensives non visibles dans la cible."],src:"Slides 16, 19"}}),
+LN("T4-05","Réponse du client","Client","activity",5,2,"D",{fx:{
+ bActor:"Client",bDesc:"Le client accepte l’offre de prêt (acceptation client, R13).",
+ aActor:"Client",aDesc:"Le client accepte les conditions proposées ou sollicite un réexamen en demandant des ajustements.",
+ how:["Réponse enregistrée dans le dossier."],
+ human:["Décision du client."],
+ ben:["Demande de modification formalisée au lieu d’un échange informel."],
+ lim:["Délai de réponse du client non précisé."],src:"Slides 16, 19"}}),
+LN("T4-G","Garanties et conditions spécifiques","Intervenant à confirmer","activity",3,2,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Intervenant compétent",bDesc:"Les garanties envisagées et les conditions clés sont identifiées dans la proposition commerciale (O4).",
+ aActor:"Non précisé",aDesc:"La cible couvre les conditions générales (montant, durée, taux, frais, assurance), mais la formalisation des garanties n’est pas visible.",
+ how:["Aucun fonctionnement LOS décrit pour les garanties."],
+ human:["Identification et formalisation des garanties, à maintenir tant que le point n’est pas arbitré."],
+ ben:["—"],
+ lim:["Point à statuer : intégration au LOS, traitement hors système ou abandon (slide 20)."],src:"Slide 20"}}),
+LN("L4-OK","Conditions acceptées","Vers phase 05 · Circuit de validation","exit",4,2),
+LN("L4-MOD","Demande de modification","Vers phase 05 · Réexamen","exit",5,3)],
+edges:[LE("L4-IN","T4-01"),LE("T4-01","T4-02"),LE("T4-02","T4-03"),LE("T4-03","T4-04"),LE("T4-04","T4-05"),LE("T4-05","L4-OK","Acceptation"),LE("T4-05","L4-MOD","Modification","loop"),LE("T4-02","T4-G","Non visible","gap")]},
+
+/* ---------------- PHASE 05 ---------------- */
+{impact:"Impact fort",summary:"Workflow d’approbation : délégations, escalade au directeur régional et réexamen des demandes refusées.",
+seq:"Workflow d’approbation · Réexamen (parcours transverse)",desc:"Circuit de validation piloté par le système selon les délégations, avec responsabilités humaines maintenues et sous-processus de réexamen.",
+actors:"Gestionnaire · Gérant d’agence · Directeur régional · Système cible (LOS)",
+before:"Circuits hétérogènes : délégation pour le cas standard, siège par email pour les dérogations, comité pour l’agrément employeur.",
+after:"Workflow structuré, escalades identifiables, décisions tracées, réexamen formalisé.",
+note:"Le LOS n’approuve pas automatiquement les crédits. Le rôle du comité crédit, les dérogations, les dossiers PPE / hors Credex et l’agrément employeur restent à clarifier. Les seuils de délégation cibles sont à confirmer : les seuils actuels de 10 000 / 30 000 USD ne sont pas réutilisés.",
+cols:5,
+out:[["R1 · R2 · Réception, choix du circuit","Mise à disposition et détermination de la délégation par le système (T5-01, T5-02)"],["R3 · Validation selon délégation","Revues gestionnaire et gérant (T5-03 à T5-05)"],["R4 à R6 · Dérogation au siège","Couverture à confirmer (G5-1)"],["R7 · R8 · Comité crédit, agrément employeur","Non démontré : remplacé par le workflow ? (G5-2, slide 20)"],["R10 · R11 · Formalisation, confirmation","Formalisation et traçabilité (T5-08)"],["R12 · Lettre d’offre, conditions suspensives","Non visibles dans la cible : à confirmer"],["R13 · Présentation de l’offre","Déplacée en amont (T4-04)"],["R14 · Sortie défavorable","Demande refusée, avec réexamen possible"]],
+nodes:[
+LN("L5-IN","Dossier scoré, conditions acceptées","Depuis phases 02 et 04","entry",1,1),
+LN("T5-01","Réception du dossier scoré","Système cible (LOS)","activity",2,1,"A",{fx:{
+ bActor:"Intervenant compétent",bDesc:"La proposition commerciale est reçue et qualifiée manuellement (R1), souvent par email.",
+ aActor:"Système cible (LOS)",aDesc:"Le système met à disposition le scoring, les paramètres du prêt, les données de risque et les conditions proposées.",
+ how:["Regroupement des éléments de décision dans le dossier."],
+ human:["Aucune ressaisie."],
+ ben:["Dossier de décision complet et homogène."],
+ lim:["Composition exacte de la page de décision à confirmer."],src:"Slides 16, 19"}}),
+LN("T5-02","Détermination du niveau de délégation","Système cible (LOS)","activity",3,1,"A",{fx:{
+ bActor:"Agence · Siège",bDesc:"Orientation manuelle : cas standard selon délégation, dérogation au siège, agrément employeur au comité (R2).",
+ aActor:"Système cible (LOS)",aDesc:"Le système utilise les règles paramétrées pour identifier le circuit de validation.",
+ how:["Application des règles de délégation paramétrées.","Routage vers les bons valideurs."],
+ human:["Aucune orientation manuelle attendue."],
+ ben:["Circuit de validation identifiable et homogène."],
+ lim:["Seuils de délégation cibles non communiqués.","Les seuils actuels de 10 000 / 30 000 USD concernent la formalisation : ne pas les transposer."],src:"Slides 13, 19"}}),
+LN("T5-03","Revue et avis du gestionnaire","Gestionnaire","activity",4,1,"C",{fx:{
+ bActor:"Intervenant compétent selon le montant",bDesc:"L’analyse et la formalisation sont portées par l’intervenant compétent selon le montant (R3, R10).",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire analyse la demande et les conditions, puis émet un avis.",
+ how:["Avis saisi dans le workflow."],
+ human:["Analyse de la demande.","Avis favorable ou défavorable."],
+ ben:["Avis tracé et visible par les niveaux suivants."],
+ lim:["Effet d’un avis défavorable à ce niveau à préciser (rejet selon slide 18)."],src:"Slides 18, 19"}}),
+LN("T5-04","Revue du gérant d’agence","Gérant d’agence","activity",5,1,"C",{fx:{
+ bActor:"Gérant d’agence",bDesc:"Le gérant formalise la décision jusqu’à 10 000 USD (R10) et valide les dossiers standard selon sa délégation.",
+ aActor:"Gérant d’agence",aDesc:"Le gérant examine le dossier, émet un avis et approuve si la demande relève de sa délégation.",
+ how:["Dossier routé automatiquement vers le gérant."],
+ human:["Examen du dossier.","Avis, puis approbation dans la limite de sa délégation."],
+ ben:["Responsabilité de validation visible."],
+ lim:["Montant de délégation du gérant dans la cible à confirmer."],src:"Slides 18, 19"}}),
+LN("T5-05","Délégation suffisante ?","Décision","decision",5,2,null,{fx:{
+ bActor:"Agence · Siège",bDesc:"Au-delà du seuil local ou en cas d’exception, transmission au siège par email.",
+ aActor:"Système cible · Gérant d’agence",aDesc:"Si la demande relève de la délégation du gérant, il l’approuve ; sinon, escalade au directeur régional.",
+ how:["Oui : approbation par le gérant puis formalisation (T5-08).","Non : escalade (T5-06)."],human:["Approbation du gérant."],ben:["Règle d’escalade explicite."],lim:["Seuils à confirmer."],src:"Slides 18, 19"}}),
+LN("T5-06","Escalade au directeur régional","LOS · Directeur régional","activity",5,3,"B",{fx:{
+ bActor:"Agence",bDesc:"Remontée au siège par email pour dérogation (R4), ou passage en comité pour l’agrément employeur (R7).",
+ aActor:"Système cible · Directeur régional",aDesc:"La demande hors délégation est transmise au directeur régional dans le workflow d’approbation.",
+ how:["Transmission automatique dans le workflow.","Escalades Branch / Regional confirmées comme couvertes (slide 20)."],
+ human:["Prise en charge par le directeur régional."],
+ ben:["Escalades identifiables et tracées."],
+ lim:["Délais de traitement non définis dans le support."],src:"Slides 18, 19, 20"}}),
+LN("T5-07","Revue et décision du directeur régional","Directeur régional","activity",4,3,"C",{fx:{
+ bActor:"Validation commerciale et Crédit au siège · Comité",bDesc:"Validation commerciale puis Crédit au siège pour les dérogations (R5, R6) ; comité pour l’agrément employeur (R8).",
+ aActor:"Directeur régional",aDesc:"Le directeur examine la demande et statue dans le cadre de ses habilitations.",
+ how:["Dossier complet disponible dans le workflow."],
+ human:["Analyse et décision."],
+ ben:["Décision rendue dans un circuit unique et tracé."],
+ lim:["Ne prouve pas que ce circuit remplace toutes les interventions du comité crédit."],src:"Slides 18, 19"}}),
+LN("D5-FAV","Décision favorable ?","Décision","decision",3,3,null,{fx:{
+ bActor:"Autorité compétente",bDesc:"Crédit approuvé ? Si non : sortie défavorable, suite à confirmer (R9, R14).",
+ aActor:"Directeur régional",aDesc:"Décision favorable : formalisation. Décision défavorable : demande refusée, avec possibilité de réexamen.",
+ how:["Oui : T5-08.","Non : demande refusée."],human:["Décision du directeur régional."],ben:["Issue de la demande explicite."],lim:["—"],src:"Slide 18"}}),
+LN("T5-08","Formalisation et traçabilité de la décision","Système cible (LOS)","activity",2,2,"A",{status:"Capacité à confirmer",fx:{
+ bActor:"Gérant · Chargé de la libération · Analyste siège",bDesc:"Formalisation selon l’autorité compétente : ≤ 10 k$ gérant, > 10 à 30 k$ chargé de la libération, > 30 k$ analyste siège (R10).",
+ aActor:"Système cible (LOS)",aDesc:"La décision est enregistrée et associée au dossier.",
+ how:["Enregistrement de la décision et du valideur.","Association au dossier."],
+ human:["Aucune ressaisie attendue."],
+ ben:["Traçabilité complète des décisions.","Responsabilités de validation visibles."],
+ lim:["Devenir des seuils de formalisation actuels à confirmer.","Lettre d’offre et conditions suspensives non visibles."],src:"Slides 19, 20"}}),
+LN("L5-OK","Crédit approuvé","Vers phase 06 · Contrat","exit",1,2),
+LN("L5-REF","Demande refusée","Réexamen possible","stop",3,4),
+LN("G5-1","Dérogations, PPE et dossiers hors Credex","Siège · circuit à confirmer","activity",1,3,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Validation commerciale · Crédit siège",bDesc:"Toute dérogation remonte au siège, quel que soit le montant ; PPE et hors Credex : remontée au siège maintenue (R4 à R6).",
+ aActor:"Non précisé",aDesc:"La slide 19 mentionne une dérogation justifiée et un validateur tracé, sans décrire le circuit cible pour ces cas.",
+ how:["Aucun circuit dédié décrit."],human:["Validation siège à maintenir tant que non arbitrée."],ben:["—"],
+ lim:["Circuit cible des dérogations, PPE et hors Credex à confirmer."],src:"Slides 8, 19"}}),
+LN("G5-2","Comité crédit et agrément employeur","Comité crédit","activity",1,4,"E",{badge:"Non démontré",fx:{
+ bActor:"Comité crédit",bDesc:"Le comité statue sur l’agrément employeur et la modification de ses conditions (R7, R8).",
+ aActor:"Non précisé",aDesc:"La slide 20 s’interroge : comité remplacé par le workflow d’approbation ? Couverture probable mais non démontrée.",
+ how:["Aucun fonctionnement LOS décrit."],human:["Décision du comité à maintenir tant que non arbitrée."],ben:["—"],
+ lim:["Rôle du comité crédit dans la cible à clarifier.","Agrément d’un nouvel employeur non décrit."],src:"Slide 20"}}),
+LN("L5-MOD","Demande de modification des conditions","Depuis phase 04","entry",4,4),
+LN("T5-09","Réouverture du dossier","Gestionnaire · LOS","activity",3,5,"B",{fx:{
+ bActor:"—",bDesc:"Pas de processus de réexamen formalisé : sortie défavorable, suite à confirmer (R14).",
+ aActor:"Gestionnaire · Système cible",aDesc:"Le dossier refusé, ou dont les conditions sont contestées, est rouvert pour un nouvel examen.",
+ how:["Réouverture du dossier existant, sans recréation."],
+ human:["Prise en compte de la demande du client."],
+ ben:["Réexamen formalisé et tracé."],
+ lim:["Conditions d’éligibilité au réexamen non précisées."],src:"Slides 16, 18"}}),
+LN("T5-10","Proposition de nouvelles conditions","Gestionnaire","activity",4,5,"B",{fx:{
+ bActor:"—",bDesc:"Aucune étape équivalente formalisée dans le parcours actuel.",
+ aActor:"Gestionnaire",aDesc:"De nouvelles conditions sont proposées en ajustant, si nécessaire, le montant, la durée, le taux ou les garanties.",
+ how:["Saisie des nouvelles conditions dans le dossier."],
+ human:["Construction de la nouvelle proposition."],
+ ben:["Ajustements tracés par rapport à la décision initiale."],
+ lim:["Ajustement des garanties : couverture LOS à confirmer (slide 20)."],src:"Slide 18"}}),
+LN("T5-11","Nouvelle revue du gestionnaire","Gestionnaire","activity",5,5,"C",{fx:{
+ bActor:"—",bDesc:"Aucune étape équivalente formalisée.",
+ aActor:"Gestionnaire",aDesc:"Le gestionnaire analyse la demande révisée et émet un premier avis.",
+ how:["Avis saisi dans le workflow."],human:["Analyse et avis."],ben:["Premier filtre avant les niveaux supérieurs."],lim:["Avis défavorable : rejet (slide 18)."],src:"Slide 18"}}),
+LN("T5-12","Nouvelle revue selon les délégations","Gérant d’agence · Directeur régional","activity",5,6,"C",{fx:{
+ bActor:"—",bDesc:"Aucune étape équivalente formalisée.",
+ aActor:"Gérant d’agence · Directeur régional",aDesc:"Le gérant émet son avis et approuve dans sa délégation ; au-delà, le directeur régional statue.",
+ how:["Même logique d’escalade que le circuit principal."],human:["Avis et décision des valideurs."],ben:["Réexamen cadré par les niveaux de délégation."],lim:["Seuils à confirmer."],src:"Slide 18"}}),
+LN("T5-13","Réexamen favorable ?","Décision","decision",4,6,null,{fx:{
+ bActor:"—",bDesc:"Aucune décision de réexamen formalisée.",
+ aActor:"Valideur compétent",aDesc:"Favorable : la demande poursuit le parcours. Défavorable, quel que soit le niveau : rejet et clôture du réexamen.",
+ how:["Favorable : formalisation (T5-08).","Défavorable : réexamen refusé."],human:["Décision définitive."],ben:["Issue tracée."],lim:["—"],src:"Slide 18"}}),
+LN("L5-REF2","Réexamen refusé","Clôture du dossier","stop",3,6)],
+edges:[LE("L5-IN","T5-01"),LE("T5-01","T5-02"),LE("T5-02","T5-03"),LE("T5-03","T5-04"),LE("T5-04","T5-05"),LE("T5-05","T5-08","Oui · gérant"),LE("T5-05","T5-06","Non"),LE("T5-06","T5-07"),LE("T5-07","D5-FAV"),LE("D5-FAV","T5-08","Oui"),LE("T5-08","L5-OK"),LE("D5-FAV","L5-REF","Non","loop"),
+ LE("L5-REF","T5-09","Si réexamen","opt"),LE("L5-MOD","T5-09","","opt"),LE("T5-09","T5-10"),LE("T5-10","T5-11"),LE("T5-11","T5-12"),LE("T5-12","T5-13"),LE("T5-13","L5-REF2","Non","loop"),LE("T5-13","T5-08","Favorable")]},
+
+/* ---------------- PHASE 06 ---------------- */
+{impact:"Impact fort",summary:"Contrat généré automatiquement, signé selon la modalité retenue et archivé dans le système cible.",
+seq:"Cible 6 · Contrat de prêt",desc:"Génération native du contrat à partir des conditions approuvées, signature par le client, archivage et rattachement au dossier.",
+actors:"Système cible (LOS) · Gestionnaire · Client",
+before:"Contrat généré via Excel / Credex, contrôles documentaires et de conformité, signature physique, transmission du dossier signé.",
+after:"Génération native du contrat, centralisation documentaire, archivage dans le système cible, signature selon la modalité retenue.",
+note:"Les contrôles documentaires réalisés aujourd’hui à la contractualisation sont en partie repositionnés dans la revue documentaire (phase 03). Les contrôles nécessitant une appréciation humaine restent identifiés. Modalité de signature à confirmer.",
+cols:5,
+out:[["C1 · Contrat via Excel / Credex","Génération automatique (T6-02)"],["C2 · C3 · Revalidation des pièces, conformité","Absorbées par la revue documentaire (phase 03) ; appréciation humaine : G6"],["C4 à C7 · Suspens et régularisation","Régularisation traitée en amont (T3-07 à T3-09)"],["C8 · Signature physique","Signature du contrat (T6-04), modalité à confirmer"],["C9 · Transmission du dossier signé","Archivage et rattachement au dossier (T6-05, T6-06)"]],
+nodes:[
+LN("L6-IN","Crédit approuvé","Depuis phase 05","entry",1,1),
+LN("T6-01","Récupération des conditions approuvées","Système cible (LOS)","activity",2,1,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Les conditions validées sont reportées dans le fichier Excel / Credex.",
+ aActor:"Système cible (LOS)",aDesc:"Le système récupère les paramètres validés lors de l’approbation du crédit.",
+ how:["Lecture des conditions approuvées dans le dossier."],human:["Aucune ressaisie."],
+ ben:["Contrat aligné sur la décision."],lim:["—"],src:"Slide 17"}}),
+LN("T6-02","Génération automatique du contrat","Système cible (LOS)","activity",3,1,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Contrat Word généré via le fichier Excel Credex (C1).",
+ aActor:"Système cible (LOS)",aDesc:"Le système prépare le contrat à partir du montant, de la durée, du taux, des frais, de l’assurance si applicable, de l’échéancier et des autres conditions documentées.",
+ how:["Page de décision : montant, taux, frais, assurance, échéancier.","Génération des T&C, couverte selon la slide 20."],
+ human:["Vérification du contrat avant présentation."],
+ ben:["Fin de la génération via Excel.","Moins d’erreurs de report."],
+ lim:["Clauses de garanties non couvertes (slide 20)."],src:"Slides 17, 19, 20"}}),
+LN("T6-03","Mise à disposition du contrat","LOS · Gestionnaire","activity",4,1,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le contrat est présenté au client pour signature, après contrôle de conformité (C3).",
+ aActor:"Système cible · Gestionnaire",aDesc:"Le contrat est transmis au client pour signature.",
+ how:["Contrat disponible dans le dossier."],human:["Présentation et explication du contrat."],
+ ben:["Délai réduit entre décision et signature."],lim:["Canal de transmission au client non précisé."],src:"Slides 13, 17"}}),
+LN("T6-04","Signature du contrat","Client","activity",5,1,"B",{status:"Modalité à confirmer",fx:{
+ bActor:"Client",bDesc:"Signature physique en agence (C8), identifiée comme irritant.",
+ aActor:"Client",aDesc:"Le client signe le contrat de prêt. La slide 20 indique une couverture de la signature digitale par le LOS.",
+ how:["Signature digitale couverte selon la slide 20."],human:["Acte de signature du client."],
+ ben:["Suppression potentielle de la signature physique."],lim:["Modalité exacte et déploiement de la signature digitale à confirmer."],src:"Slides 17, 19, 20"}}),
+LN("T6-05","Archivage du contrat signé","Système cible (LOS)","activity",5,2,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le dossier signé est transmis pour la suite du processus (C9).",
+ aActor:"Système cible (LOS)",aDesc:"Le contrat signé est conservé dans le système cible.",
+ how:["Archivage automatique du contrat signé."],human:["Aucune."],
+ ben:["Contrat retrouvable immédiatement."],lim:["Archivage documentaire global : probablement couvert mais non démontré (slide 20)."],src:"Slides 13, 17, 19, 20"}}),
+LN("T6-06","Association du contrat au dossier","Système cible (LOS)","activity",4,2,"A",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le contrat signé circule avec le dossier papier et numérisé.",
+ aActor:"Système cible (LOS)",aDesc:"Le contrat est lié à la demande correspondante.",
+ how:["Rattachement du contrat à la référence du dossier."],human:["Aucune."],
+ ben:["Dossier complet en un seul endroit."],lim:["Association décrite implicitement via l’archivage dans le système cible."],src:"Slides 13, 19"}}),
+LN("G6","Contrôles nécessitant une appréciation humaine","Conformité · Juridique (ponctuel)","activity",1,2,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Intervenant compétent selon le montant",bDesc:"Revalidation des pièces et contrôle de conformité avant signature (C2, C3) ; Conformité ponctuelle, cas de saisine à confirmer.",
+ aActor:"Non précisé",aDesc:"Ces contrôles sont en grande partie repositionnés dans la revue documentaire. Les rôles Conformité et Juridique ne sont pas visibles dans la cible.",
+ how:["Aucun fonctionnement LOS décrit."],human:["Avis Conformité / Juridique sur les cas qui le nécessitent."],ben:["—"],
+ lim:["Contrôles de conformité : probablement couverts mais non démontrés.","Juridique : non visible (slide 20)."],src:"Slide 20"}}),
+LN("L6-OUT","Contrat signé et archivé","Vers phase 07","exit",3,2)],
+edges:[LE("L6-IN","T6-01"),LE("T6-01","T6-02"),LE("T6-02","T6-03"),LE("T6-03","T6-04"),LE("T6-04","T6-05"),LE("T6-05","T6-06"),LE("T6-06","L6-OUT")]},
+
+/* ---------------- PHASE 07 ---------------- */
+{impact:"Impact fort",summary:"Création du prêt dans Amplitude via l’intégration LOS, puis décaissement dans le système bancaire.",
+seq:"Cible 7 · Création & décaissement",desc:"Transmission structurée des données vers Amplitude, création du prêt, vérification avant décaissement et notification du client.",
+actors:"Système cible (LOS) · Amplitude · Chargé de la libération crédit",
+before:"Réception du dossier, contrôle final, création manuelle du crédit dans Amplitude, décaissement, notification.",
+after:"Meilleure continuité LOS – Amplitude, moins de ressaisies, transmission structurée, mise en place fluidifiée.",
+note:"Les contrôles finaux avant décaissement sont maintenus tant que leur couverture n’est pas démontrée. Aucun circuit automatique de résolution des rejets Amplitude n’est documenté dans le LOS.",
+cols:5,
+out:[["M1 · Réception du dossier signé","Récupération automatique (T7-01)"],["M2 · Contrôle final","Maintenu (T7-05), couverture à confirmer"],["M3 · M4 · Boucle de régularisation","Non décrite dans la cible : à confirmer"],["M5 · Création dans Amplitude","Transmission et création via l’intégration (T7-03, T7-04)"]],
+nodes:[
+LN("L7-IN","Contrat signé et archivé","Depuis phase 06","entry",1,1),
+LN("T7-01","Récupération du contrat signé","Système cible (LOS)","activity",2,1,"A",{fx:{
+ bActor:"Chargé de la libération",bDesc:"Le chargé de la libération réceptionne le dossier signé (M1).",
+ aActor:"Système cible (LOS)",aDesc:"Le système récupère le contrat signé archivé dans le dossier.",
+ how:["Lecture du contrat archivé (T6-05)."],human:["Aucune."],ben:["Pas de transmission physique du dossier."],lim:["—"],src:"Slide 17"}}),
+LN("T7-02","Référence de prêt générée ou associée","Système cible (LOS)","activity",3,1,"A",{fx:{
+ bActor:"Chargé de la libération",bDesc:"Les références sont créées lors de la saisie dans Amplitude.",
+ aActor:"Système cible (LOS)",aDesc:"Une référence unique de prêt et l’agence sont générées par le système pour assurer le suivi.",
+ how:["Génération de la référence du prêt et de l’agence."],human:["Aucune."],ben:["Suivi administratif et opérationnel facilité."],lim:["—"],src:"Slides 17, 19"}}),
+LN("T7-03","Transmission des informations vers Amplitude","LOS · Amplitude","activity",4,1,"A",{status:"Selon les interfaces prévues",fx:{
+ bActor:"Chargé de la libération",bDesc:"Les informations du crédit sont saisies dans Amplitude à partir du dossier (M5).",
+ aActor:"Système cible · Amplitude",aDesc:"Le système cible transmet à Amplitude les informations nécessaires à la création du prêt.",
+ how:["Transmission structurée : montant, durée, échéancier, taux, informations client."],human:["Suivi des éventuels rejets."],
+ ben:["Réduction de certaines ressaisies.","Transmission structurée des données."],lim:["Interfaces à préciser.","Résolution des rejets LOS – Amplitude non documentée."],src:"Slides 13, 17"}}),
+LN("T7-04","Création du prêt dans Amplitude","Amplitude (CBS)","activity",5,1,"A",{status:"Dans le périmètre cible",fx:{
+ bActor:"Chargé de la libération",bDesc:"Création manuelle du crédit dans le Core Banking System (M5).",
+ aActor:"Amplitude (CBS)",aDesc:"Le prêt est enregistré dans le Core Banking System.",
+ how:["Création du prêt à partir des données transmises."],human:["Contrôle de la bonne création."],
+ ben:["Meilleure continuité entre LOS et Amplitude."],lim:["Création couverte selon la slide 20 ; modalités techniques à confirmer."],src:"Slides 17, 19, 20"}}),
+LN("T7-05","Vérification des conditions nécessaires au décaissement","Intervenant compétent","activity",5,2,"C",{status:"Couverture à confirmer",fx:{
+ bActor:"Chargé de la libération",bDesc:"Contrôle final du dossier, des pièces et des conditions requises avant décaissement (M2, M3).",
+ aActor:"Intervenant compétent",aDesc:"Les conditions nécessaires au décaissement sont vérifiées avant le versement des fonds.",
+ how:["Aucun contrôle automatique démontré."],human:["Contrôle final avant décaissement."],
+ ben:["Sécurité maintenue avant décaissement."],lim:["Couverture par le LOS non démontrée : contrôle maintenu."],src:"Slides 10, 17"}}),
+LN("T7-06","Décaissement des fonds","Amplitude · Chargé de la libération","activity",4,2,"B",{fx:{
+ bActor:"Chargé de la libération",bDesc:"Décaissement des fonds sur le compte client (M6).",
+ aActor:"Amplitude · Chargé de la libération crédit",aDesc:"Les fonds sont transférés sur le compte du client conformément aux conditions validées.",
+ how:["Décaissement dans le système bancaire, couvert selon la slide 20."],human:["Déclenchement ou supervision du décaissement."],
+ ben:["Mise en place fluidifiée."],lim:["Répartition exacte entre système et chargé de la libération à confirmer."],src:"Slides 17, 20"}}),
+LN("T7-07","Notification du client","Système cible · acteur compétent","activity",3,2,"B",{fx:{
+ bActor:"Gestionnaire",bDesc:"Le gestionnaire informe le client de la mise en place (M7).",
+ aActor:"Système cible · acteur compétent",aDesc:"Le client est informé de la mise en place effective du prêt.",
+ how:["Notification à partir du dossier."],human:["Échange avec le client si nécessaire."],
+ ben:["Information du client plus rapide."],lim:["Canal et auteur de la notification à confirmer."],src:"Slides 13, 17, 19"}}),
+LN("L7-OUT","Prêt actif et client notifié","Vers phase 08","exit",2,2)],
+edges:[LE("L7-IN","T7-01"),LE("T7-01","T7-02"),LE("T7-02","T7-03"),LE("T7-03","T7-04"),LE("T7-04","T7-05"),LE("T7-05","T7-06"),LE("T7-06","T7-07"),LE("T7-07","L7-OUT")]},
+
+/* ---------------- PHASE 08 ---------------- */
+{impact:"Impact à préciser",uncertain:true,summary:"Amélioration partielle de la disponibilité des informations. Couverture détaillée du monitoring documentaire post-libération à confirmer.",
+seq:"Cible 8 · Monitoring post-libération",desc:"Le LOS améliore la disponibilité des informations du prêt, mais le suivi documentaire après décaissement n’est pas démontré comme couvert.",
+actors:"Agence · Siège · Responsabilités à confirmer",
+before:"Suivi de la numérisation, contrôle des scans, régularisation en agence, conservation des originaux, monitoring Credex.",
+after:"Informations du prêt disponibles ; suivi documentaire, contrôles d’anomalies et monitoring : couverture à confirmer.",
+note:"Aucune relance automatique à J+30 n’est retenue : le parcours Credex actuel n’en prévoit pas et la slide 20 ne la démontre pas. Le reporting financier (encours, EMI, exposition par employeur) ne remplace pas le suivi documentaire Credex.",
+cols:5,
+out:[["P2 · Suivi de la numérisation","T8-02, couverture à confirmer"],["P3 · P4 · Contrôle des scans","T8-03, couverture à confirmer"],["P5 · P6 · Anomalie, régularisation","T8-04, intervention humaine"],["P7 · Originaux en agence","Conservé (T8-05)"],["P8 · Monitoring Credex","T8-06, couverture à confirmer"]],
+nodes:[
+LN("L8-IN","Prêt créé et fonds décaissés","Depuis phase 07","entry",1,1),
+LN("T8-01","Disponibilité des informations du prêt","Systèmes concernés","activity",2,1,"B",{fx:{
+ bActor:"Chargé de la libération · Conservation",bDesc:"Les informations du crédit sont dispersées entre Amplitude, Credex et les documents numérisés.",
+ aActor:"Système cible · Amplitude",aDesc:"Les données issues du crédit créé sont disponibles dans les systèmes concernés.",
+ how:["Données du dossier LOS et du prêt Amplitude accessibles."],human:["Exploitation des informations."],
+ ben:["Amélioration partielle de la disponibilité des informations."],lim:["Périmètre de consultation à préciser."],src:"Slides 17, 19"}}),
+LN("T8-02","Suivi des documents numérisés","Responsabilité à confirmer","activity",3,1,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Agence · Siège",bDesc:"Suivi de la numérisation des documents (P2).",
+ aActor:"À confirmer",aDesc:"Les documents scannés font l’objet d’un suivi ; la slide 19 indique « Suivi documentaire : À confirmer ».",
+ how:["Non démontré."],human:["Suivi à maintenir tant que non arbitré."],ben:["—"],
+ lim:["Monitoring post-décaissement non couvert ou non visible (slide 20)."],src:"Slides 17, 19, 20"}}),
+LN("T8-03","Contrôle des anomalies documentaires","Responsabilité à confirmer","activity",4,1,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Siège",bDesc:"Vérification de la présence et de la qualité des documents scannés (P3, P4).",
+ aActor:"À confirmer",aDesc:"Les responsabilités et automatisations du contrôle après décaissement ne sont pas décrites.",
+ how:["Non démontré."],human:["Contrôle des scans."],ben:["—"],
+ lim:["La boucle documentaire de la cible s’arrête à l’instruction, pas après décaissement (slide 20)."],src:"Slide 20"}}),
+LN("T8-04","Régularisation de la numérisation","Agence","activity",5,1,"C",{status:"Couverture à confirmer",fx:{
+ bActor:"Agence",bDesc:"Signalement d’une anomalie puis régularisation de la numérisation en agence (P5, P6).",
+ aActor:"Agence",aDesc:"Le traitement reste à préciser selon les règles opérationnelles.",
+ how:["Non démontré."],human:["Nouvelle numérisation des documents concernés."],ben:["—"],
+ lim:["Pièces manquantes après décaissement : non couvertes (slide 20)."],src:"Slides 10, 20"}}),
+LN("T8-05","Conservation des originaux en agence","Agence","activity",2,2,"D",{fx:{
+ bActor:"Agence",bDesc:"L’agence conserve les originaux ; le back-office travaille sur les documents numérisés (P7).",
+ aActor:"Agence",aDesc:"Les documents originaux restent conservés en agence.",
+ how:["Hors système."],human:["Conservation physique."],ben:["—"],lim:["—"],src:"Slide 10"}}),
+LN("T8-06","Mise à jour du monitoring documentaire","Responsabilité à confirmer","activity",4,2,"E",{badge:"Couverture à confirmer",fx:{
+ bActor:"Responsabilité à confirmer",bDesc:"Mise à jour du monitoring documentaire Credex (P8).",
+ aActor:"À confirmer",aDesc:"Le périmètre du suivi documentaire post-libération n’est pas démontré dans la cible ; seul un reporting financier est décrit.",
+ how:["Non démontré."],human:["Mise à jour du monitoring tant que non arbitrée."],ben:["—"],
+ lim:["Mise à jour du monitoring : « à confirmer » côté cible (slides 19, 20)."],src:"Slides 19, 20"}}),
+LN("N8-REP","Reporting : encours, EMI, exposition par employeur","Décrit dans la cible","note",1,3,null,{fx:{
+ bActor:"—",bDesc:"Monitoring via intranet et fichier Excel (slide 20).",
+ aActor:"Système cible",aDesc:"La cible décrit un reporting financier. Il ne prouve pas que le LOS réalise le monitoring documentaire.",
+ how:["Reporting des encours, des EMI et de l’exposition par employeur."],human:["Exploitation du reporting."],ben:["Pilotage du portefeuille."],
+ lim:["Ne remplace pas le suivi documentaire Credex."],src:"Slide 19"}}),
+LN("G8-J30","Relances à J+30","Non retenu","activity",2,3,"E",{badge:"Non démontré",fx:{
+ bActor:"—",bDesc:"Pas de relance systématique à J+30 dans le parcours Credex actuel (atelier 1.2 du 16 octobre 2026).",
+ aActor:"—",aDesc:"La slide 17 évoque des relances à J+30, mais la slide 20 ne les démontre pas comme couvertes. Elles ne sont pas présentées comme une fonctionnalité LOS.",
+ how:["Aucun mécanisme décrit."],human:["—"],ben:["—"],
+ lim:["Contradiction entre la slide 17 et les corrections d’atelier : à arbitrer."],src:"Slides 10, 17, 20"}}),
+LN("L8-OUT","Suivi documentaire — périmètre à confirmer","Fin du périmètre","exit",4,3)],
+edges:[LE("L8-IN","T8-01"),LE("T8-01","T8-02"),LE("T8-02","T8-03"),LE("T8-03","T8-04","Anomalie","gap"),LE("T8-03","T8-06","Sans anomalie"),LE("T8-04","T8-06","","gap"),LE("T8-01","T8-05","En parallèle"),LE("T8-05","T8-06"),LE("T8-06","L8-OUT")]}
+];
+
+
+/* =====================================================================
+   COUCHE LOS — moteur (n’intervient que lorsque l’interrupteur est activé)
+   ===================================================================== */
+const CATS=["A","B","C","D","E"];
+const CI={
+ A:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1 3 9h4l-1 6 6-8H8z" fill="currentColor"/></svg>',
+ B:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 6A5 5 0 0 0 4 4M3 10a5 5 0 0 0 9 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 1v3h3M12 15v-3H9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+ C:'<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 14c.5-3 2.3-4.4 4.5-4.4S10 11 10.5 14" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m10.5 7.5 1.6 1.6 3-3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+ D:'<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+ E:'<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.4 1.6"/><path d="M6.3 6.3a1.8 1.8 0 1 1 2.5 1.6c-.6.3-.8.6-.8 1.3M8 11.4v.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
+};
+const CATNAME={A:"Automatisé",B:"Transformé",C:"Validation humaine",D:"Conservé",E:"À confirmer / hors périmètre"};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const catText=n=>n.cat==="E"?(n.badge||"Couverture à confirmer"):CAT[n.cat].label;
+const catBadge=(k,txt)=>`<span class="cb cb-${k}">${CI[k]}${esc(txt)}</span>`;
+function catCounts(L){const c={A:0,B:0,C:0,D:0,E:0};L.nodes.forEach(n=>{if(n.cat)c[n.cat]++});return c}
+const chipsHTML=c=>CATS.filter(k=>c[k]).map(k=>`<span class="chip chip-${k}" title="${CATNAME[k]}">${CI[k]}${c[k]}</span>`).join("");
+const pillLegend=()=>`<div class="los-pills" role="list" aria-label="Légende des impacts du LOS">${CATS.map(k=>`<span role="listitem" class="lg lg-${k}">${CI[k]}${CATNAME[k]}</span>`).join("")}</div>`;
+const LOS_RULES=[[/agent ia/i,"scan"],[/amplitude|référentiel/i,"db"],[/scoring|score\b|résultat/i,"chart"],[/délégation/i,"users"],[/escalade/i,"send"],[/archiv/i,"archive"],[/référence/i,"tag"],[/réouverture|nouveau dépôt/i,"refresh"],[/nouvelle revue|revue/i,"users"],[/garantie/i,"shield"],[/relance/i,"bell"],[/reporting/i,"chart"],[/refus/i,"alert"],[/identification|profil/i,"user"],[/disponibilité/i,"search"],[/complément/i,"mail"],[/dossier/i,"doc"]];
+function losIcon(n){
+  if(n.type==="stop")return svgIc("alert");
+  if(n.type==="note")return svgIc("chart");
+  if(n.type!=="activity")return icon(n);
+  for(const [r,v] of LOS_RULES){if(r.test(n.label))return svgIc(v)}
+  return icon(n);
+}
+
+/* ---------- Interrupteur ---------- */
+const heroK=$(".hero .kicker"),heroH=$(".hero h1"),heroP=$(".hero p");
+const HERO_ASIS={k:heroK.innerHTML,h:heroH.innerHTML,p:heroP.innerHTML};
+const LEGEND_ASIS=$("#legend").innerHTML;
+const losToggle=$("#losToggle");
+function applyLosUI(){
+  document.body.classList.toggle("los-on",losOn);
+  losToggle.checked=losOn;losToggle.setAttribute("aria-checked",String(losOn));
+  $("#losStatus").textContent=losOn?"Processus cible — Avec LOS":"Processus actuel — AS-IS";
+  heroK.innerHTML=losOn?"Macro-processus cible · Avec LOS":HERO_ASIS.k;
+  heroH.innerHTML=losOn?"Parcours crédit <em>Retail</em> avec LOS":HERO_ASIS.h;
+  heroP.innerHTML=losOn?"Impact du LOS sur chacune des huit phases actuelles. Sélectionnez une phase pour découvrir son schéma cible et ouvrir la fiche d’impact de chaque activité.":HERO_ASIS.p;
+  $("#phTitle").textContent=losOn?"Schéma cible avec LOS":"Schéma opérationnel";
+  $("#legend").innerHTML=losOn?`<b>Légende</b>${CATS.map(k=>`<span><i class="l-${k}"></i>${CATNAME[k]}</span>`).join("")}<span><i class="l-in"></i>Entrée / sortie</span>`:LEGEND_ASIS;
+  $("#selH").textContent=losOn?"Fiche d’impact":"Activité sélectionnée";
+  $("#losMacro").innerHTML=losOn?`${pillLegend()}<div class="los-seq"><b>Séquence opérationnelle cible</b><span>01 Demande</span><i>→</i><span>03 Données &amp; documents</span><i>→</i><span>02 Scoring</span><i>→</i><span>04 Conditions</span><i>→</i><span>05 Validation &amp; réexamen</span><i>→</i><span>06 Contrat</span><i>→</i><span>07 Création &amp; décaissement</span><i>→</i><span class="u">08 Monitoring</span><em>La navigation conserve les huit phases actuelles ; chaque activité LOS n’apparaît qu’une fois, dans la phase correspondante. Les slides de travail marquées WIP ne sont pas considérées comme validées.</em></div>`:"";
+}
+function setLos(on){
+  losOn=!!on;applyLosUI();closeDrawer(true);
+  history.replaceState(null,"",inDetail?"#phase-"+(cur+1)+(losOn?"-los":""):location.pathname+(losOn?"#los":""));
+  if(inDetail)renderDetail();else renderMacro();
+  const t=inDetail?$("#graph"):$("#cards");t.classList.remove("swap");void t.offsetWidth;t.classList.add("swap");setTimeout(()=>t.classList.remove("swap"),800);
+}
+losToggle.addEventListener("change",()=>setLos(losToggle.checked));
+
+/* ---------- Vue macro LOS ---------- */
+function renderLosMacro(){
+  const tot={A:0,B:0,C:0,D:0,E:0};losSteps.forEach(L=>{const c=catCounts(L);CATS.forEach(k=>tot[k]+=c[k])});
+  $("#kpis").innerHTML=[[steps.length,"Phases"],[tot.A,"Automatisées"],[tot.B,"Transformées"],[tot.C,"Validation humaine"],[tot.E,"À confirmer"]].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#chevrons").innerHTML=steps.map((s,i)=>`<button type="button" class="chev ${i===cur?"on":""} ${losSteps[i].uncertain?"unc":""}" data-i="${i}"><b>${pad(i)}</b>${s.title}</button>`).join("");
+  $("#cards").innerHTML=steps.map((s,i)=>{const L=losSteps[i];
+    return `<button type="button" class="card los-card ${L.uncertain?"unc":""}" data-i="${i}"><span class="num">${pad(i)}</span><span class="imp">${L.impact}</span><h2>${s.title}</h2><p>${L.summary}</p><div class="chips">${chipsHTML(catCounts(L))}</div><div class="meta">Schéma cible et fiches d’impact<em>Explorer →</em></div></button>`}).join("");
+  document.querySelectorAll("#chevrons .chev,#cards .card").forEach(b=>b.addEventListener("click",()=>open(+b.dataset.i)));
+  $("#crumbs").innerHTML=`<span>Parcours crédit Retail · avec LOS</span>`;
+}
+
+/* ---------- Vue détail LOS ---------- */
+let losSmall=false;
+function renderLosDetail(){
+  closeDrawer(true);
+  const s=steps[cur],L=losSteps[cur],c=catCounts(L);
+  $("#crumbs").innerHTML=`<button type="button" id="cHome">Parcours crédit Retail</button><span>/</span><span>${pad(cur)} · ${s.title} · avec LOS</span>`;
+  $("#cHome").addEventListener("click",home);
+  $("#dNum").textContent=pad(cur);$("#dTitle").textContent=s.title;$("#dDesc").textContent=L.desc;
+  $("#ctx").innerHTML=[["Séquence cible",esc(L.seq)],["Avant LOS",esc(L.before)],["Avec LOS",esc(L.after)],["Composition",`<span class="chips">${chipsHTML(c)}</span>`]].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+  $("#actors").innerHTML=L.actors.split(" · ").map(a=>`<span>${esc(a)}</span>`).join("");
+  $("#note").textContent=L.note;
+  $("#sel").innerHTML=`<p class="empty">Cliquez sur une activité du schéma pour ouvrir sa fiche d’impact : avant / avec LOS, rôle humain, bénéfices, limites et slide source.</p>`;
+  $("#outList").innerHTML=`<ul class="outl">${L.out.map(([a,b])=>`<li><span>${esc(a)}</span><em>${esc(b)}</em></li>`).join("")}</ul>`;
+  $("#prev").disabled=cur===0;$("#next").disabled=cur===steps.length-1;
+
+  const g=$("#graph");g.querySelectorAll(".node,.lbl").forEach(x=>x.remove());$("#edges").innerHTML="";
+  g.classList.add("los-graph");
+  losSmall=matchMedia("(max-width:680px)").matches;
+  if(losSmall){g.style.gridTemplateColumns="minmax(0,1fr)";g.style.gridTemplateRows="";g.style.minWidth="0"}
+  else{
+    const rows=Math.max(...L.nodes.map(n=>n.row)),decRows=new Set(L.nodes.filter(n=>n.type==="decision").map(n=>n.row));
+    g.style.gridTemplateColumns=`repeat(${L.cols},minmax(172px,1fr))`;
+    g.style.gridTemplateRows=Array.from({length:rows},(_,r)=>decRows.has(r+1)?"190px":"minmax(150px,auto)").join(" ");
+    g.style.minWidth=(L.cols*218)+"px";
+  }
+  const TAG={entry:"Entrée",exit:"Sortie",stop:"Sortie défavorable",note:"Référence",decision:"Décision"};
+  L.nodes.forEach((n,i)=>{
+    const el=document.createElement("button");el.type="button";
+    el.className=`node los ${n.type}${n.cat?" cat-"+n.cat:""}`;el.id="n-"+n.id;
+    if(losSmall){el.style.gridColumn=1;el.style.gridRow=i+1}else{el.style.gridColumn=n.col;el.style.gridRow=n.row}
+    el.style.setProperty("--d",(i*26)+"ms");
+    el.setAttribute("aria-label",`${n.label} — ouvrir la fiche d’impact`);
+    const lab=n.type==="activity"?`Activité · ${n.id}`:TAG[n.type];
+    const badges=n.cat?`<span class="badges">${catBadge(n.cat,catText(n))}${n.cat2?catBadge(n.cat2,CAT[n.cat2].label):""}${n.status?`<span class="st">${esc(n.status)}</span>`:""}</span>`:"";
+    el.innerHTML=n.type==="decision"
+      ?`<svg class="dia" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="50,1 99,50 50,99 1,50"/></svg><div class="hd">${losIcon(n)}<span class="t">Décision</span></div><strong>${esc(n.label)}</strong>`
+      :`<div class="hd">${losIcon(n)}<span class="t">${lab}</span></div><strong>${esc(n.label)}</strong><small>${esc(n.actor)}</small>${badges}`;
+    el.addEventListener("click",()=>openFiche(n,el));
+    g.appendChild(el);
+  });
+  requestAnimationFrame(()=>requestAnimationFrame(drawLos));
+}
+
+/* ---------- Routage orthogonal A* : connexions explicites, contournement des cartes ---------- */
+function Heap(){this.a=[]}
+Heap.prototype.push=function(f,v){const a=this.a;a.push([f,v]);let i=a.length-1;while(i>0){const p=(i-1)>>1;if(a[p][0]<=a[i][0])break;[a[p],a[i]]=[a[i],a[p]];i=p}};
+Heap.prototype.pop=function(){const a=this.a,top=a[0],last=a.pop();if(a.length){a[0]=last;let i=0;for(;;){const l=2*i+1,r=l+1;let m=i;if(l<a.length&&a[l][0]<a[m][0])m=l;if(r<a.length&&a[r][0]<a[m][0])m=r;if(m===i)break;[a[m],a[i]]=[a[i],a[m]];i=m}}return top};
+function drawLos(){
+  const L=losSteps[cur],g=$("#graph"),svg=$("#edges");
+  const mk=(id,c)=>`<marker id="${id}" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1L9,5L0,9Z" fill="${c}"/></marker>`;
+  svg.innerHTML=`<defs>${mk("la","#009DDF")}${mk("lr","#EB5C2E")}${mk("lg","#D9675B")}${mk("lo","#8A979B")}</defs>`;
+  g.querySelectorAll(".lbl").forEach(x=>x.remove());
+  const G=g.getBoundingClientRect(),W=g.clientWidth,H=g.clientHeight;
+  const R={};L.nodes.forEach(n=>{const el=document.getElementById("n-"+n.id);if(!el)return;const r=el.getBoundingClientRect();R[n.id]={l:r.left-G.left,t:r.top-G.top,r:r.right-G.left,b:r.bottom-G.top,dec:n.type==="decision"}});
+  const C=8,cols=Math.ceil(W/C)+1,rows=Math.ceil(H/C)+1,NN=cols*rows,blocked=new Uint8Array(NN),usedH=new Uint8Array(NN),usedV=new Uint8Array(NN),M=7;
+  Object.values(R).forEach(b=>{for(let j=Math.max(0,Math.floor((b.t-M)/C));j<=Math.min(rows-1,Math.ceil((b.b+M)/C));j++)for(let i=Math.max(0,Math.floor((b.l-M)/C));i<=Math.min(cols-1,Math.ceil((b.r+M)/C));i++){const x=i*C,y=j*C;if(x>=b.l-M&&x<=b.r+M&&y>=b.t-M&&y<=b.b+M)blocked[j*cols+i]=1}});
+  const DX=[1,0,-1,0],DY=[0,1,0,-1],usedPorts={};
+  function ports(id){const b=R[id],out=[],fr=b.dec?[.5]:[.5,.3,.7];
+    [[3,"t"],[1,"b"]].forEach(([d,s])=>fr.forEach((f,k)=>out.push({key:id+s+k,d,x:b.l+(b.r-b.l)*f,y:s==="t"?b.t:b.b,off:k?10:0})));
+    [[2,"l"],[0,"r"]].forEach(([d,s])=>out.push({key:id+s,d,x:s==="l"?b.l:b.r,y:(b.t+b.b)/2,off:0}));
+    return out.map(p=>Object.assign(p,{i:Math.round((p.x+DX[p.d]*15)/C),j:Math.round((p.y+DY[p.d]*15)/C)})).filter(p=>p.i>=0&&p.j>=0&&p.i<cols&&p.j<rows&&!blocked[p.j*cols+p.i])}
+  const BEND=26,OVER=70,CROSS=6;
+  L.edges.map((e,k)=>({e,k,p:e.kind==="normal"?0:1})).sort((a,b)=>a.p-b.p||a.k-b.k).forEach(({e})=>{
+    if(!R[e.from]||!R[e.to])return;
+    const S=ports(e.from),T=ports(e.to);if(!S.length||!T.length)return;
+    const tmap=new Map();T.forEach(t=>{const c=t.j*cols+t.i;if(!tmap.has(c))tmap.set(c,[]);tmap.get(c).push(t)});
+    const h=(i,j)=>{let m=1e9;for(const t of T){const v=Math.abs(i-t.i)+Math.abs(j-t.j);if(v<m)m=v}return m*C};
+    const gS=new Float64Array(NN*4).fill(Infinity),from=new Int32Array(NN*4).fill(-1),startP=new Map(),heap=new Heap();
+    S.forEach(p=>{const s=(p.j*cols+p.i)*4+p.d,c=p.off+(usedPorts[p.key]?260:0);if(c<gS[s]){gS[s]=c;startP.set(s,p);heap.push(c+h(p.i,p.j),s)}});
+    let best=Infinity,bestS=-1,bestT=null,guard=0;
+    while(heap.a.length&&guard++<300000){const[f,s]=heap.pop();if(f>=best)break;const gc=gS[s],cell=s>>2,d=s&3,ci=cell%cols,cj=(cell-ci)/cols;
+      if(f-h(ci,cj)>gc+1e-6)continue;
+      const ts=tmap.get(cell);if(ts){for(const t of ts){const tot=gc+(d===(t.d+2)%4?0:BEND)+t.off+(usedPorts[t.key]?260:0);if(tot<best){best=tot;bestS=s;bestT=t}}}
+      for(let nd=0;nd<4;nd++){if(nd===((d+2)&3))continue;const ni=ci+DX[nd],nj=cj+DY[nd];if(ni<0||nj<0||ni>=cols||nj>=rows)continue;const nc=nj*cols+ni;if(blocked[nc])continue;
+        const hor=nd===0||nd===2,cost=C+(nd!==d?BEND:0)+(hor?(usedH[nc]?OVER:0)+(usedV[nc]?CROSS:0):(usedV[nc]?OVER:0)+(usedH[nc]?CROSS:0));
+        const ns=nc*4+nd,ng=gc+cost;if(ng<gS[ns]){gS[ns]=ng;from[ns]=s;heap.push(ng+h(ni,nj),ns)}}}
+    let pts;
+    if(bestS<0){const A=R[e.from],B=R[e.to],ax=(A.l+A.r)/2,bx=(B.l+B.r)/2,y=(A.b+B.t)/2;pts=[[ax,A.b],[ax,y],[bx,y],[bx,B.t]]}
+    else{const chain=[];let s=bestS,sp=null;while(s>=0){chain.push(s);if(from[s]<0){sp=startP.get(s);break}s=from[s]}chain.reverse();
+      const cells=chain.map(x=>{const c=x>>2;return[(c%cols)*C,Math.floor(c/cols)*C]});
+      for(let k=1;k<chain.length;k++){const c=chain[k]>>2;(((chain[k]&3)%2)===0?usedH:usedV)[c]=1}
+      usedPorts[sp.key]=1;usedPorts[bestT.key]=1;
+      const last=cells[cells.length-1];
+      const a0=sp.d%2===1?[cells[0][0],sp.y]:[sp.x,cells[0][1]],b0=bestT.d%2===1?[last[0],bestT.y]:[bestT.x,last[1]];
+      const raw=[a0,...cells,b0],simp=[raw[0]];
+      for(let k=1;k<raw.length-1;k++){const p=simp[simp.length-1],q=raw[k],r=raw[k+1];if((p[0]===q[0]&&q[0]===r[0])||(p[1]===q[1]&&q[1]===r[1]))continue;simp.push(q)}
+      simp.push(raw[raw.length-1]);pts=simp}
+    const kind=e.kind,col={normal:"#009DDF",loop:"#EB5C2E",gap:"#D9675B",opt:"#8A979B"}[kind];
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("class","edge "+kind);p.setAttribute("d",rounded(pts,8));p.setAttribute("fill","none");
+    p.setAttribute("stroke",col);p.setAttribute("stroke-width","2");
+    if(kind!=="normal")p.setAttribute("stroke-dasharray",kind==="gap"?"2 5":"6 5");
+    if(kind==="gap")p.setAttribute("stroke-linecap","round");
+    p.setAttribute("marker-end",`url(#${{normal:"la",loop:"lr",gap:"lg",opt:"lo"}[kind]})`);svg.appendChild(p);
+    if(e.label){let lx=pts[0][0],ly=pts[0][1];
+      for(let k=0;k<pts.length-1;k++){const a=pts[k],b=pts[k+1],len=Math.abs(b[0]-a[0])+Math.abs(b[1]-a[1]);
+        if(len>=44||k===pts.length-2){const t=Math.min(len/2,Math.max(26,len*.35));lx=a[0]+Math.sign(b[0]-a[0])*t;ly=a[1]+Math.sign(b[1]-a[1])*t;break}}
+      const t=e.label;let cls="";
+      if(kind==="gap")cls="gap";else if(kind==="opt")cls="opt";else if(/^non/i.test(t))cls="no";else if(kind==="loop")cls="reg";else if(/^(oui|favorable|acceptation)/i.test(t))cls="yes";
+      const l=document.createElement("span");l.className="lbl los-lbl "+cls;l.textContent=t;l.style.left=lx+"px";l.style.top=ly+"px";g.appendChild(l)}
+  });
+}
+
+/* ---------- Fiche d’impact (panneau latéral) ---------- */
+const drawer=$("#drawer"),drawerBody=$("#drawerBody"),scrim=$("#scrim");let lastFocus=null;
+const ul=a=>a&&a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p class="muted">—</p>`;
+function openFiche(n,el){
+  document.querySelectorAll(".node.los.sel").forEach(x=>x.classList.remove("sel"));el&&el.classList.add("sel");lastFocus=el;
+  const L=losSteps[cur],f=n.fx;let html;
+  if(!f){const what={entry:"Point d’entrée de la phase dans la séquence cible.",exit:"Résultat de la phase, transmis à l’étape suivante de la séquence cible.",stop:"Issue défavorable du circuit de décision."}[n.type]||"";
+    html=`<div class="fh"><span class="kind">${n.type==="stop"?"Sortie défavorable":n.type==="entry"?"Entrée":"Sortie"}</span><h2>${esc(n.label)}</h2><p class="muted">${esc(n.actor)}</p></div><section><h3>Lecture</h3><p>${what}</p><p><b>Séquence cible :</b> ${esc(L.seq)}</p></section>`}
+  else{const b0=n.cat?catBadge(n.cat,catText(n)):`<span class="cb cb-N">${n.type==="decision"?"Décision":"Référence"}</span>`;
+    html=`<div class="fh"><div class="fbadges">${b0}${n.cat2?catBadge(n.cat2,CAT[n.cat2].label):""}${n.status?`<span class="st">${esc(n.status)}</span>`:""}</div>${n.cat?`<span class="kind">${n.id}</span>`:""}<h2>${esc(n.label)}</h2></div>
+    <div class="cmp"><div class="bef"><h3>Avant LOS</h3><p class="who">${esc(f.bActor)}</p><p>${esc(f.bDesc)}</p></div><div class="aft"><h3>Avec LOS</h3><p class="who">${esc(f.aActor)}</p><p>${esc(f.aDesc)}</p></div></div>
+    <section><h3>Fonctionnement du LOS</h3>${ul(f.how)}</section><section><h3>Tâches humaines restantes</h3>${ul(f.human)}</section>
+    <section><h3>Bénéfices attendus</h3>${ul(f.ben)}</section><section class="lim"><h3>Limites et points à confirmer</h3>${ul(f.lim)}</section>
+    <p class="src">Source : ${esc(f.src)} · ${SRC}</p>`}
+  drawerBody.innerHTML=html;drawerBody.scrollTop=0;
+  drawer.classList.add("open");scrim.classList.add("open");drawer.setAttribute("aria-hidden","false");
+  setTimeout(()=>$("#drawerClose").focus({preventScroll:true}),60);
+}
+function closeDrawer(silent){
+  if(!drawer.classList.contains("open"))return;
+  drawer.classList.remove("open");scrim.classList.remove("open");drawer.setAttribute("aria-hidden","true");
+  document.querySelectorAll(".node.los.sel").forEach(x=>x.classList.remove("sel"));
+  if(!silent&&lastFocus&&document.body.contains(lastFocus))lastFocus.focus({preventScroll:true});
+}
+$("#drawerClose").addEventListener("click",()=>closeDrawer());scrim.addEventListener("click",()=>closeDrawer());
+window.addEventListener("keydown",e=>{if(drawer.classList.contains("open")&&e.key==="Escape"){e.stopImmediatePropagation();e.preventDefault();closeDrawer()}},true);
+window.addEventListener("resize",()=>{if(losOn&&inDetail&&matchMedia("(max-width:680px)").matches!==losSmall)renderDetail()});
+
+/* ---------- Évènements ---------- */
+$("#prev").addEventListener("click",()=>open(cur-1));
+$("#next").addEventListener("click",()=>open(cur+1));
+$("#home").addEventListener("click",home);
+document.addEventListener("keydown",e=>{if(!inDetail)return;if(e.key==="Escape")home();if(e.key==="ArrowLeft"&&cur>0)open(cur-1);if(e.key==="ArrowRight"&&cur<steps.length-1)open(cur+1)});
+let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>inDetail&&draw(),120)});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>inDetail&&draw());
+if(/los/.test(location.hash))losOn=true;
+applyLosUI();
+const m=location.hash.match(/phase-(\d+)/);if(m){cur=Math.max(0,Math.min(steps.length-1,+m[1]-1));inDetail=true}
+show();
+})();
+</script>
+</body>
+</html>
